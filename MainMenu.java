@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package necorlibsys;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.*;
 
 /**
  *
@@ -84,6 +87,11 @@ public class MainMenu extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/rep.png"))); // NOI18N
 
         jButton4.setText("Books");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Library Patrons");
 
@@ -207,6 +215,14 @@ public class MainMenu extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO java.awt.event.ActionEvent evt) {
+    JDialog booksMenu = new BooksMenu(this, true);
+    booksMenu.pack();
+    booksMenu.setVisible(true);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
