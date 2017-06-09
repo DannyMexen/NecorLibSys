@@ -94,8 +94,18 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         jButton5.setText("Library Patrons");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Reports");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jMenu1.setMnemonic('f');
         jMenu1.setText("File");
@@ -216,6 +226,7 @@ public class MainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    // Open the Books menu
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO java.awt.event.ActionEvent evt) {
     JDialog booksMenu = new BooksMenu(this, true);
@@ -223,6 +234,22 @@ public class MainMenu extends javax.swing.JFrame {
     booksMenu.setVisible(true);
         
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    // Open the Reports menu
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        JDialog reportsMenu = new ReportsMenu(this, true);
+        reportsMenu.pack();
+        reportsMenu.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    // Open the Library Patrons menu
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        JDialog patronsMenu = new PatronsMenu(this, true);
+        patronsMenu.pack();
+        patronsMenu.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
