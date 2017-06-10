@@ -7,6 +7,7 @@ package necorlibsys;
 import java.sql.*;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.JComboBox;
 /**
  *
  * @author mexen
@@ -51,7 +52,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         jTextPhone = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxGender = new javax.swing.JComboBox<>();
         jFormattedTextDOB = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -139,8 +140,13 @@ public class PatronsMenu extends javax.swing.JDialog {
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel24.setText("Gender:");
 
-        jComboBox1.setMaximumRowCount(2);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+        jComboBoxGender.setMaximumRowCount(2);
+        jComboBoxGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+        jComboBoxGender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxGenderActionPerformed(evt);
+            }
+        });
 
         jFormattedTextDOB.setToolTipText("YYYY-MM-DD");
         jFormattedTextDOB.addActionListener(new java.awt.event.ActionListener() {
@@ -181,7 +187,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                                     .addComponent(jTextFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextInitial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFormattedTextDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
@@ -216,7 +222,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
@@ -405,7 +411,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                                 .addContainerGap()
                                 .addComponent(jLabel3)))
                         .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -538,6 +544,8 @@ public class PatronsMenu extends javax.swing.JDialog {
     String initial;
     String lastName;
     String address;
+    String dob;
+    String gender;
     String email;
     String phone;
     String insertPatron;
@@ -549,13 +557,16 @@ public class PatronsMenu extends javax.swing.JDialog {
         firstName = jTextFirstName.getText();
         initial = jTextInitial.getText().substring(0);
         lastName = jTextLastName.getText();
+        dob = jFormattedTextDOB.getText();
         address = jTextAddress.getText();
         email = jTextEmail.getText();
         phone = jTextPhone.getText();
         insertPatron = "INSERT INTO patron"+
-                "(first_name,initial,last_name,address,email,phone)"+
+                "(first_name,initial,last_name,dob,gender,address,email,phone)"+
                 "VALUES"+
-                "(\'"+firstName+"\',"+"\'"+initial+"\',"+"\'"+lastName+"\',"+"\'"+address+"\',"+"\'"+email+"\',"+"\'"+phone+"\'"+")";
+                "(\'"+firstName+"\',"+"\'"+initial+"\',"+"\'"+lastName+"\',"+
+                "\'"+dob+"\',"+"\'"+gender+"\',"+
+                "\'"+address+"\',"+"\'"+email+"\',"+"\'"+phone+"\'"+")";
         
         try{
         Class.forName(JDBC_DRIVER);
@@ -590,6 +601,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         jTextFirstName.setText("");
         jTextInitial.setText("");
         jTextLastName.setText("");
+        jFormattedTextDOB.setText("");
         jTextAddress.setText("");
         jTextEmail.setText("");
         jTextPhone.setText("");
@@ -609,6 +621,13 @@ public class PatronsMenu extends javax.swing.JDialog {
     private void jTextInitialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextInitialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextInitialActionPerformed
+
+    private void jComboBoxGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxGenderActionPerformed
+        // TODO add your handling code here:
+        JComboBox cb = (JComboBox)evt.getSource();
+        gender = (String)cb.getSelectedItem();
+      
+    }//GEN-LAST:event_jComboBoxGenderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -656,9 +675,9 @@ public class PatronsMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonAddPatron;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBoxGender;
     private javax.swing.JFormattedTextField jFormattedTextDOB;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JFormattedTextField jFormattedTextField2;
