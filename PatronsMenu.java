@@ -664,12 +664,13 @@ public class PatronsMenu extends javax.swing.JDialog {
         jTextEditInitial.setText(rs.getString("initial"));
         jTextEditLastName.setText(rs.getString("last_name"));
         
-        /*
-        Date date = rs.getDate(dob);
-        DateFormat df = new SimpleDateFormat();
-        dob = df.format(date);
+        
+        // Change date format
+        DateFormat df;
+            df = new SimpleDateFormat("yyyy-MM-dd");
+        dob = df.format(rs.getDate("dob"));
         jFormattedEditDate.setText(dob);
-        */
+        
         jComboBoxEditGender.setSelectedItem(rs.getString("gender"));
         jTextEditAddress.setText(rs.getString("address"));
         jTextEditEmail.setText(rs.getString("email"));
