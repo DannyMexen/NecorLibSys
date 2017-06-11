@@ -7,7 +7,7 @@ package necorlibsys;
 import java.sql.*;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import necorlibsys.view.BookAdded;
+
 /**
  *
  * @author mexen
@@ -944,15 +944,15 @@ public class BooksMenu extends javax.swing.JDialog {
     // Add button inserts the new record to the database
     private void jButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBookActionPerformed
         // TODO add your handling code here:
-        title = "\'"+jTextBookTitle.getText()+"\',";
-        author = "\'"+jTextAuthor.getText()+"\',";
-        isbn = "\'"+jTextISBN.getText()+"\',";
-        category = "\'"+jTextCategory.getText()+"\'";
+        title = jTextBookTitle.getText();
+        author = jTextAuthor.getText();
+        isbn = jTextISBN.getText();
+        category = jTextCategory.getText();
         
         insertBook = "INSERT INTO book"+
                 "(title,author,isbn,category)"+
                 "VALUES"+
-                "("+title+author+isbn+category+");";
+                "(\'"+title+"\',"+"\'"+author+"\',"+"\'"+isbn+"\',"+"\'"+category+"\')";
         
         try{
         Class.forName(JDBC_DRIVER);
@@ -960,17 +960,42 @@ public class BooksMenu extends javax.swing.JDialog {
         try{
         conn = DriverManager.getConnection(DB_URL, USER, PASS);
         stmt = conn.createStatement();
+        
+        //warn user to enter something if field is empty
+        if ((title.isEmpty() || author.isEmpty()) || (isbn.isEmpty() || category.isEmpty())){
+           int warning = JOptionPane.showConfirmDialog(null, "Enter missing values.", "Warning",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else {
+        // Prompt the user
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Add this book?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // add book if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+        
         // insert the record
         stmt.executeUpdate(insertBook);
+        
         // clear the text fields
         jTextBookTitle.setText("");
         jTextAuthor.setText("");
         jTextISBN.setText("");
         jTextCategory.setText("");
-        // display success message
-            JOptionPane.showConfirmDialog(this, "Added");
+
+        } 
+            
+        }  
         
         }catch(SQLException se){}
+        
+       
     }//GEN-LAST:event_jButtonAddBookActionPerformed
      // end adding book
     
@@ -1002,17 +1027,15 @@ public class BooksMenu extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                BooksMenu dialog = new BooksMenu(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            BooksMenu dialog = new BooksMenu(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
         });
     }
 
