@@ -656,6 +656,16 @@ public class PatronsMenu extends javax.swing.JDialog {
         conn = DriverManager.getConnection(DB_URL, USER, PASS);
         stmt = conn.createStatement();
         patronID = jTextEditPatID.getText();
+        
+        //compare the ID provided to the IDs in the databases
+        
+        
+        //warn user if ID does not exist
+        if(patronID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        else{
         search = "SELECT * FROM patron WHERE patron_id = " + patronID + " ";
         ResultSet rs = stmt.executeQuery(search);
         
@@ -669,13 +679,18 @@ public class PatronsMenu extends javax.swing.JDialog {
         DateFormat df;
             df = new SimpleDateFormat("yyyy-MM-dd");
         dob = df.format(rs.getDate("dob"));
+        if (dob.isEmpty() || dob == null){
+            jFormattedEditDate.setText("");
+        } else{
         jFormattedEditDate.setText(dob);
+        }
         
         jComboBoxEditGender.setSelectedItem(rs.getString("gender"));
         jTextEditAddress.setText(rs.getString("address"));
         jTextEditEmail.setText(rs.getString("email"));
         jTextEditPhone.setText(rs.getString("phone"));
-          
+        
+        } // end while
         }
         }catch(SQLException se){}
     }//GEN-LAST:event_jButtonSearchActionPerformed
