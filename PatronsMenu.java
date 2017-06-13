@@ -78,6 +78,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         jLabel26 = new javax.swing.JLabel();
         jFormattedEditDate = new javax.swing.JFormattedTextField();
         jComboBoxEditGender = new javax.swing.JComboBox<>();
+        jButtonEditClear = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -198,7 +199,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 110, Short.MAX_VALUE))))
+                        .addGap(0, 141, Short.MAX_VALUE))))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextFirstName, jTextLastName});
@@ -287,6 +288,13 @@ public class PatronsMenu extends javax.swing.JDialog {
             }
         });
 
+        jButtonEditClear.setText("Clear");
+        jButtonEditClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditClearActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -304,19 +312,16 @@ public class PatronsMenu extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextEditPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonEditSearch)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextEditAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                                .addComponent(jButtonEditSave)))
-                        .addContainerGap())
+                        .addComponent(jTextEditPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEditSearch)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextEditAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addComponent(jButtonEditClear))
                             .addComponent(jTextEditLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFormattedEditDate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxEditGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,7 +337,9 @@ public class PatronsMenu extends javax.swing.JDialog {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTextEditEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextEditPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEditSave)))
+                .addContainerGap())
         );
 
         jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextEditFirstName, jTextEditLastName});
@@ -351,35 +358,37 @@ public class PatronsMenu extends javax.swing.JDialog {
                     .addComponent(jTextEditFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
                     .addComponent(jTextEditEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel16)
-                    .addComponent(jTextEditInitial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextEditPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextEditLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(jFormattedEditDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel26)
-                    .addComponent(jComboBoxEditGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 30, Short.MAX_VALUE)
-                        .addComponent(jButtonEditSave)
-                        .addContainerGap())
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel16)
+                            .addComponent(jTextEditInitial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextEditPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(jTextEditLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(jFormattedEditDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel26)
+                            .addComponent(jComboBoxEditGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(jTextEditAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(26, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonEditSave)
+                            .addComponent(jButtonEditClear))
+                        .addContainerGap())))
         );
 
         jTabbedPane1.addTab("Edit", jPanel2);
@@ -454,7 +463,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                             .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 47, Short.MAX_VALUE)))
+                        .addGap(0, 78, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -555,6 +564,7 @@ public class PatronsMenu extends javax.swing.JDialog {
     
     // Get the entered data
     String patronID;
+    
     String firstName; 
     String initial;
     String lastName;
@@ -565,10 +575,13 @@ public class PatronsMenu extends javax.swing.JDialog {
     String phone;
     String insertPatron;
     String editPatron;
+    String insertEditPatron;
     String deletePatron;
     String search;
     String male = "M";
     String female = "F";
+    int status = 0; // for purposes of empty records
+    
             
     
     // Add button inserts the new record to the database
@@ -632,6 +645,8 @@ public class PatronsMenu extends javax.swing.JDialog {
         jTextAddress.setText("");
         jTextEmail.setText("");
         jTextPhone.setText("");
+        
+       
 
         } 
             
@@ -664,6 +679,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         // Search for a record to edit
         
         //jTextEditFirstName.setText("Test");
+        jButtonEditClearActionPerformed(evt);
         
         try{
         Class.forName(JDBC_DRIVER);
@@ -673,15 +689,14 @@ public class PatronsMenu extends javax.swing.JDialog {
         stmt = conn.createStatement();
         patronID = jTextEditPatID.getText();
         
-        //compare the ID provided to the IDs in the databases
         
-        
-        //warn user if ID does not exist
+        //warn user if ID has not been entered
         if(patronID.isEmpty()){ 
            int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
             JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
         }
         else{
+                
         search = "SELECT * FROM patron WHERE patron_id = " + patronID + " ";
         ResultSet rs = stmt.executeQuery(search);
         
@@ -704,15 +719,25 @@ public class PatronsMenu extends javax.swing.JDialog {
         jComboBoxEditGender.setSelectedItem(rs.getString("gender"));
         jTextEditAddress.setText(rs.getString("address"));
         jTextEditEmail.setText(rs.getString("email"));
-        jTextEditPhone.setText(rs.getString("phone"));
-        
-         conn.close();
+        jTextEditPhone.setText(rs.getString("phone")); 
         
         } // end while
         
         
+        String test = jTextEditFirstName.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+           
+           status = 1;
         }
-       
+        
+        
+        
+        }
+        conn.close();
+        
+        
         }catch(SQLException se){}
     }//GEN-LAST:event_jButtonEditSearchActionPerformed
 
@@ -724,7 +749,9 @@ public class PatronsMenu extends javax.swing.JDialog {
 // Save the changes made to the record
     private void jButtonEditSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSaveActionPerformed
         // TODO add your handling code here:
-        patronID = jTextEditPatID.getText();
+        
+        //patronID = jTextEditPatID.getText();
+        int id = Integer.parseInt(patronID);
         firstName = jTextEditFirstName.getText();
         initial = jTextEditInitial.getText().substring(0);
         lastName = jTextEditLastName.getText();
@@ -744,17 +771,17 @@ public class PatronsMenu extends javax.swing.JDialog {
         }catch(ClassNotFoundException e){}
         try{
         conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        //stmt = conn.createStatement();
-        
+        stmt = conn.createStatement();
+         
         
         //warn user to enter something if field is empty
-        if (((firstName.isEmpty() || lastName.isEmpty()) || (address.isEmpty() || phone.isEmpty())) || (email.isEmpty())){
+        if (((firstName.isEmpty() || lastName.isEmpty()) || (dob.isEmpty() || address.isEmpty() || phone.isEmpty())) || (email.isEmpty())){
            int warning = JOptionPane.showConfirmDialog(null, "Enter missing values.", "Warning",
             JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
         }
-        
+               
         else {
-        // Prompt the user
+                    
         JDialog.setDefaultLookAndFeelDecorated(true);
         int response = JOptionPane.showConfirmDialog(null, "Edit this patron's details?", "Confirm",
         JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
@@ -765,7 +792,22 @@ public class PatronsMenu extends javax.swing.JDialog {
             
         // edit the patron if yes
         } else if (response == JOptionPane.YES_OPTION) {
+            
+            // compare IDs
+            String compareID = jTextEditPatID.getText();
+            if (!(compareID.equals(patronID))){
+                int warning = JOptionPane.showConfirmDialog(null, "You cannot change an existing ID.", "Warning",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+                
+            }
         
+            else {
+                 // give user a chance to add a new record with the id entered      
+        if (status == 1){
+                insertEditPatron = "INSERT INTO patron(patron_id) VALUES(" + id + ")";
+                stmt.executeUpdate(insertEditPatron);
+                status = 0;
+            } 
         // update the record
         //stmt.executeUpdate(editPatron);
         pStmt = conn.prepareStatement(editPatron);
@@ -781,6 +823,8 @@ public class PatronsMenu extends javax.swing.JDialog {
         
         pStmt.executeUpdate();
         conn.close();
+            }
+        
         
         } 
             
@@ -789,6 +833,27 @@ public class PatronsMenu extends javax.swing.JDialog {
         }catch(SQLException se){}
         
     }//GEN-LAST:event_jButtonEditSaveActionPerformed
+
+    private void jButtonEditClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditClearActionPerformed
+        // TODO add your handling code here:
+        firstName = ""; 
+     initial = "";
+     lastName = "";
+     address = "";
+     dob = "";
+     gender = "";
+     email = "";
+     phone = "";
+     
+     //jTextEditPatID.setText("");
+     jTextEditFirstName.setText("");
+     jTextEditInitial.setText("");
+     jTextEditLastName.setText("");
+     jFormattedEditDate.setText("");
+     jTextEditAddress.setText("");
+     jTextEditEmail.setText("");
+     jTextEditPhone.setText("");
+    }//GEN-LAST:event_jButtonEditClearActionPerformed
 
     /**
      * @param args the command line arguments
@@ -834,6 +899,7 @@ public class PatronsMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddPatron;
+    private javax.swing.JButton jButtonEditClear;
     private javax.swing.JButton jButtonEditSave;
     private javax.swing.JButton jButtonEditSearch;
     private javax.swing.JComboBox<String> jComboBox3;
