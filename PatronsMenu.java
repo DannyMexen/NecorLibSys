@@ -87,7 +87,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         jTextDeleteAddress = new javax.swing.JTextField();
         jTextDeleteLastName = new javax.swing.JTextField();
@@ -410,7 +410,12 @@ public class PatronsMenu extends javax.swing.JDialog {
 
         jLabel7.setText("Address:");
 
-        jButton2.setText("Delete");
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText("E-mail:");
 
@@ -445,7 +450,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(jButtonDelete))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -517,7 +522,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                         .addGap(23, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonDelete)
                         .addContainerGap())))
         );
 
@@ -863,6 +868,7 @@ public class PatronsMenu extends javax.swing.JDialog {
     private void jButtonDeleteSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSearchActionPerformed
         // TODO add your handling code here:
         // Search for a record to delete
+        
         jTextDeleteFirstName.setText("");
         jTextDeleteInitial.setText("");
         jTextDeleteLastName.setText("");
@@ -930,6 +936,52 @@ public class PatronsMenu extends javax.swing.JDialog {
         }catch(SQLException se){}
     }//GEN-LAST:event_jButtonDeleteSearchActionPerformed
 
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        // TODO add your handling code here:
+        patronID = jTextDeletePatID.getText();
+        int id = Integer.parseInt(patronID);
+        
+        deletePatron = "DELETE FROM patron WHERE patron_id = " + id ;
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        
+        // Prompt the user
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Delete this patron?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // add book if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+        
+        // insert the record
+        stmt.executeUpdate(deletePatron);
+        
+        
+        // clear the text fields - use a method
+        jTextDeletePatID.setText("");
+        jTextDeleteFirstName.setText("");
+        jTextDeleteInitial.setText("");
+        jTextDeleteLastName.setText("");
+        jFormattedDeleteDOB.setText("");
+        jTextDeleteAddress.setText("");
+        jTextDeleteEmail.setText("");
+        jTextDeletePhone.setText("");
+         
+        conn.close();
+        }  
+          
+        }catch(SQLException se){}
+    
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -971,8 +1023,8 @@ public class PatronsMenu extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddPatron;
+    private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonDeleteSearch;
     private javax.swing.JButton jButtonEditClear;
     private javax.swing.JButton jButtonEditSave;
