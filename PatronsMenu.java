@@ -76,30 +76,30 @@ public class PatronsMenu extends javax.swing.JDialog {
         jTextEditPhone = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jFormattedEditDate = new javax.swing.JFormattedTextField();
+        jFormattedEditDOB = new javax.swing.JFormattedTextField();
         jComboBoxEditGender = new javax.swing.JComboBox<>();
         jButtonEditClear = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextDeletePatID = new javax.swing.JTextField();
+        jButtonDeleteSearch = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jTextDeleteAddress = new javax.swing.JTextField();
+        jTextDeleteLastName = new javax.swing.JTextField();
+        jTextDeleteInitial = new javax.swing.JTextField();
+        jTextDeleteFirstName = new javax.swing.JTextField();
+        jTextDeleteEmail = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextDeletePhone = new javax.swing.JTextField();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jFormattedDeleteDOB = new javax.swing.JFormattedTextField();
+        jComboBoxDeleteGender = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -323,7 +323,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                                 .addComponent(jButtonEditClear))
                             .addComponent(jTextEditLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedEditDate, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedEditDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBoxEditGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,7 +373,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel25)
-                            .addComponent(jFormattedEditDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedEditDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26)
@@ -395,7 +395,12 @@ public class PatronsMenu extends javax.swing.JDialog {
 
         jLabel3.setText("Patron ID:");
 
-        jButton1.setText("Search");
+        jButtonDeleteSearch.setText("Search");
+        jButtonDeleteSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteSearchActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("First Name:");
 
@@ -415,8 +420,8 @@ public class PatronsMenu extends javax.swing.JDialog {
 
         jLabel28.setText("Gender:");
 
-        jComboBox3.setMaximumRowCount(2);
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
+        jComboBoxDeleteGender.setMaximumRowCount(2);
+        jComboBoxDeleteGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "F", "M" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -444,30 +449,30 @@ public class PatronsMenu extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextDeletePatID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1))
+                                .addComponent(jButtonDeleteSearch))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextDeleteFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
+                                    .addComponent(jTextDeleteLastName)
+                                    .addComponent(jTextDeleteInitial, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextDeleteEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextDeletePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jFormattedDeleteDOB, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxDeleteGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextDeleteAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 78, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField3, jTextField5});
+        jPanel3Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextDeleteFirstName, jTextDeleteLastName});
 
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,40 +480,40 @@ public class PatronsMenu extends javax.swing.JDialog {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jTextDeletePatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonDeleteSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDeleteFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextDeleteEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel5)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextDeleteInitial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel9)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jTextDeletePhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextDeleteLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel27)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedDeleteDOB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jComboBoxDeleteGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextDeleteAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 26, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -637,7 +642,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         stmt.executeUpdate(insertPatron);
         conn.close();
         
-        // clear the text fields
+        // clear the text fields - use a method
         jTextFirstName.setText("");
         jTextInitial.setText("");
         jTextLastName.setText("");
@@ -711,9 +716,9 @@ public class PatronsMenu extends javax.swing.JDialog {
             df = new SimpleDateFormat("yyyy-MM-dd");
         dob = df.format(rs.getDate("dob"));
         if (dob.isEmpty() || dob == null){
-            jFormattedEditDate.setText("");
+            jFormattedEditDOB.setText("");
         } else{
-        jFormattedEditDate.setText(dob);
+        jFormattedEditDOB.setText(dob);
         }
         
         jComboBoxEditGender.setSelectedItem(rs.getString("gender"));
@@ -755,7 +760,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         firstName = jTextEditFirstName.getText();
         initial = jTextEditInitial.getText().substring(0);
         lastName = jTextEditLastName.getText();
-        dob = jFormattedEditDate.getText();
+        dob = jFormattedEditDOB.getText();
         if(jComboBoxEditGender.getSelectedItem().equals(male)){
             gender = male;
         } else {
@@ -849,11 +854,81 @@ public class PatronsMenu extends javax.swing.JDialog {
      jTextEditFirstName.setText("");
      jTextEditInitial.setText("");
      jTextEditLastName.setText("");
-     jFormattedEditDate.setText("");
+     jFormattedEditDOB.setText("");
      jTextEditAddress.setText("");
      jTextEditEmail.setText("");
      jTextEditPhone.setText("");
     }//GEN-LAST:event_jButtonEditClearActionPerformed
+
+    private void jButtonDeleteSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSearchActionPerformed
+        // TODO add your handling code here:
+        // Search for a record to delete
+        jTextDeleteFirstName.setText("");
+        jTextDeleteInitial.setText("");
+        jTextDeleteLastName.setText("");
+        jFormattedDeleteDOB.setText("");
+        jTextDeleteAddress.setText("");
+        jTextDeleteEmail.setText("");
+        jTextDeletePhone.setText("");
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        patronID = jTextDeletePatID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(patronID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+                
+        search = "SELECT * FROM patron WHERE patron_id = " + patronID + " ";
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+        jTextDeleteFirstName.setText(rs.getString("first_name"));
+        jTextDeleteInitial.setText(rs.getString("initial"));
+        jTextDeleteLastName.setText(rs.getString("last_name"));
+        
+        
+        // Change date format
+        DateFormat df;
+            df = new SimpleDateFormat("yyyy-MM-dd");
+        dob = df.format(rs.getDate("dob"));
+        if (dob.isEmpty() || dob == null){
+            jFormattedDeleteDOB.setText("");
+        } else{
+        jFormattedDeleteDOB.setText(dob);
+        }
+        
+        jComboBoxDeleteGender.setSelectedItem(rs.getString("gender"));
+        jTextDeleteAddress.setText(rs.getString("address"));
+        jTextDeleteEmail.setText(rs.getString("email"));
+        jTextDeletePhone.setText(rs.getString("phone")); 
+        
+        } // end while
+        
+        
+        String test = jTextDeleteFirstName.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+                     
+        }
+        
+        
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+    }//GEN-LAST:event_jButtonDeleteSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -896,18 +971,18 @@ public class PatronsMenu extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddPatron;
+    private javax.swing.JButton jButtonDeleteSearch;
     private javax.swing.JButton jButtonEditClear;
     private javax.swing.JButton jButtonEditSave;
     private javax.swing.JButton jButtonEditSearch;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBoxDeleteGender;
     private javax.swing.JComboBox<String> jComboBoxEditGender;
     private javax.swing.JComboBox<String> jComboBoxGender;
-    private javax.swing.JFormattedTextField jFormattedEditDate;
+    private javax.swing.JFormattedTextField jFormattedDeleteDOB;
+    private javax.swing.JFormattedTextField jFormattedEditDOB;
     private javax.swing.JFormattedTextField jFormattedTextDOB;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -941,6 +1016,13 @@ public class PatronsMenu extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextAddress;
+    private javax.swing.JTextField jTextDeleteAddress;
+    private javax.swing.JTextField jTextDeleteEmail;
+    private javax.swing.JTextField jTextDeleteFirstName;
+    private javax.swing.JTextField jTextDeleteInitial;
+    private javax.swing.JTextField jTextDeleteLastName;
+    private javax.swing.JTextField jTextDeletePatID;
+    private javax.swing.JTextField jTextDeletePhone;
     private javax.swing.JTextField jTextEditAddress;
     private javax.swing.JTextField jTextEditEmail;
     private javax.swing.JTextField jTextEditFirstName;
@@ -949,13 +1031,6 @@ public class PatronsMenu extends javax.swing.JDialog {
     private javax.swing.JTextField jTextEditPatID;
     private javax.swing.JTextField jTextEditPhone;
     private javax.swing.JTextField jTextEmail;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextFirstName;
     private javax.swing.JTextField jTextInitial;
     private javax.swing.JTextField jTextLastName;
