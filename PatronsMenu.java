@@ -60,14 +60,14 @@ public class PatronsMenu extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jTextEditPatID = new javax.swing.JTextField();
-        jButtonSearch = new javax.swing.JButton();
+        jButtonEditSearch = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonEditSave = new javax.swing.JButton();
         jTextEditFirstName = new javax.swing.JTextField();
         jTextEditInitial = new javax.swing.JTextField();
         jTextEditLastName = new javax.swing.JTextField();
@@ -249,10 +249,10 @@ public class PatronsMenu extends javax.swing.JDialog {
 
         jLabel10.setText("Patron ID:");
 
-        jButtonSearch.setText("Search");
-        jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditSearch.setText("Search");
+        jButtonEditSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonSearchActionPerformed(evt);
+                jButtonEditSearchActionPerformed(evt);
             }
         });
 
@@ -268,7 +268,12 @@ public class PatronsMenu extends javax.swing.JDialog {
 
         jLabel16.setText("Phone:");
 
-        jButton4.setText("Save");
+        jButtonEditSave.setText("Save");
+        jButtonEditSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditSaveActionPerformed(evt);
+            }
+        });
 
         jLabel25.setText("DoB:");
 
@@ -303,12 +308,12 @@ public class PatronsMenu extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jTextEditPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButtonSearch)
+                                .addComponent(jButtonEditSearch)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jTextEditAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                                .addComponent(jButton4)))
+                                .addComponent(jButtonEditSave)))
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +344,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(jTextEditPatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonSearch))
+                    .addComponent(jButtonEditSearch))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -367,7 +372,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 30, Short.MAX_VALUE)
-                        .addComponent(jButton4)
+                        .addComponent(jButtonEditSave)
                         .addContainerGap())
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -546,6 +551,7 @@ public class PatronsMenu extends javax.swing.JDialog {
     
     Connection conn = null;
     Statement stmt = null;
+    PreparedStatement pStmt = null;
     
     // Get the entered data
     String patronID;
@@ -558,6 +564,8 @@ public class PatronsMenu extends javax.swing.JDialog {
     String email;
     String phone;
     String insertPatron;
+    String editPatron;
+    String deletePatron;
     String search;
     String male = "M";
     String female = "F";
@@ -573,6 +581,12 @@ public class PatronsMenu extends javax.swing.JDialog {
         address = jTextAddress.getText();
         email = jTextEmail.getText();
         phone = jTextPhone.getText();
+        
+        if(jComboBoxGender.getSelectedItem().equals(male)){
+            gender = male;
+        } else {
+            gender = female;
+        }
         insertPatron = "INSERT INTO patron"+
                 "(first_name,initial,last_name,dob,gender,address,email,phone)"+
                 "VALUES"+
@@ -608,6 +622,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         
         // insert the record
         stmt.executeUpdate(insertPatron);
+        conn.close();
         
         // clear the text fields
         jTextFirstName.setText("");
@@ -621,6 +636,8 @@ public class PatronsMenu extends javax.swing.JDialog {
         } 
             
         }  
+        
+        
         
         }catch(SQLException se){}
         
@@ -640,10 +657,9 @@ public class PatronsMenu extends javax.swing.JDialog {
         gender = (String)cb.getSelectedItem();
       
     }//GEN-LAST:event_jComboBoxGenderActionPerformed
-
-    
-    
-    private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
+   
+    // Search for a record to edit
+    private void jButtonEditSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSearchActionPerformed
         // TODO add your handling code here:
         // Search for a record to edit
         
@@ -690,14 +706,89 @@ public class PatronsMenu extends javax.swing.JDialog {
         jTextEditEmail.setText(rs.getString("email"));
         jTextEditPhone.setText(rs.getString("phone"));
         
+         conn.close();
+        
         } // end while
+        
+        
         }
+       
         }catch(SQLException se){}
-    }//GEN-LAST:event_jButtonSearchActionPerformed
+    }//GEN-LAST:event_jButtonEditSearchActionPerformed
 
     private void jComboBoxEditGenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEditGenderActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxEditGenderActionPerformed
+
+    
+// Save the changes made to the record
+    private void jButtonEditSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSaveActionPerformed
+        // TODO add your handling code here:
+        patronID = jTextEditPatID.getText();
+        firstName = jTextEditFirstName.getText();
+        initial = jTextEditInitial.getText().substring(0);
+        lastName = jTextEditLastName.getText();
+        dob = jFormattedEditDate.getText();
+        if(jComboBoxEditGender.getSelectedItem().equals(male)){
+            gender = male;
+        } else {
+            gender = female;
+        }
+        address = jTextEditAddress.getText();
+        email = jTextEditEmail.getText();
+        phone = jTextEditPhone.getText();
+        editPatron = "UPDATE patron SET first_name = ?, initial = ?, last_name = ?, dob = ?, gender = ?, address = ?, email = ?, phone = ? WHERE patron_id = ?";
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        //stmt = conn.createStatement();
+        
+        
+        //warn user to enter something if field is empty
+        if (((firstName.isEmpty() || lastName.isEmpty()) || (address.isEmpty() || phone.isEmpty())) || (email.isEmpty())){
+           int warning = JOptionPane.showConfirmDialog(null, "Enter missing values.", "Warning",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else {
+        // Prompt the user
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Edit this patron's details?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // edit the patron if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+        
+        // update the record
+        //stmt.executeUpdate(editPatron);
+        pStmt = conn.prepareStatement(editPatron);
+        pStmt.setString(1, firstName);
+        pStmt.setString(2, initial);
+        pStmt.setString(3, lastName);
+        pStmt.setString(4, dob); 
+        pStmt.setString(5, gender);
+        pStmt.setString(6, address);
+        pStmt.setString(7, email);
+        pStmt.setString(8, phone);    
+        pStmt.setString(9, patronID);
+        
+        pStmt.executeUpdate();
+        conn.close();
+        
+        } 
+            
+        }  
+        
+        }catch(SQLException se){}
+        
+    }//GEN-LAST:event_jButtonEditSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -742,9 +833,9 @@ public class PatronsMenu extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonAddPatron;
-    private javax.swing.JButton jButtonSearch;
+    private javax.swing.JButton jButtonEditSave;
+    private javax.swing.JButton jButtonEditSearch;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JComboBox<String> jComboBoxEditGender;
     private javax.swing.JComboBox<String> jComboBoxGender;
