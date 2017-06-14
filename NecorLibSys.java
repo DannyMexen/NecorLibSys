@@ -22,6 +22,8 @@ public class NecorLibSys {
         JFrame mainMenu = new MainMenu();
         mainMenu.pack();
         mainMenu.setVisible(true);
+        
+       
     }
     
 }

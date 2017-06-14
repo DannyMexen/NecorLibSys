@@ -5,8 +5,12 @@
  */
 package necorlibsys;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import static necorlibsys.PatronsMenu.JDBC_DRIVER;
+import java.util.Date;
 
 /**
  *
@@ -14,6 +18,19 @@ import javax.swing.JOptionPane;
  */
 public class BooksMenu extends javax.swing.JDialog {
     
+    
+    // Variables to work with
+    String title; 
+    String author;
+    String isbn;
+    String category;
+    String insertBook;
+    String bookID;
+    String search;
+    String currentDate;
+    String reservationDate;
+    String reservationStatus;
+    int status;
     
 
     /**
@@ -24,6 +41,15 @@ public class BooksMenu extends javax.swing.JDialog {
     public BooksMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        currentDate = dateFormat.format(date);
+        jFormattedCheckOutDate.setText(currentDate);
+        jFormattedCheckOutReturnDate.setText("");
+        
+        status = 0;
+        
     }
 
     /**
@@ -41,9 +67,9 @@ public class BooksMenu extends javax.swing.JDialog {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTextCheckInBookID = new javax.swing.JTextField();
+        jButtonCheckInSearch = new javax.swing.JButton();
+        jButtonCheckIn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -55,38 +81,41 @@ public class BooksMenu extends javax.swing.JDialog {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextDaysOverdue = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jButton16 = new javax.swing.JButton();
+        jTextPenalty = new javax.swing.JTextField();
+        jFormattedCheckInReturnDate = new javax.swing.JFormattedTextField();
+        jFormattedCheckInDateBorrowed = new javax.swing.JFormattedTextField();
+        jTextCheckInPatID = new javax.swing.JTextField();
+        jTextCheckInBorrower = new javax.swing.JTextField();
+        jTextCheckInAuthor = new javax.swing.JTextField();
+        jTextCheckInTitle = new javax.swing.JTextField();
+        jButtonCheckInCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        jTextCheckOutBookID = new javax.swing.JTextField();
+        jButtonCheckOutSearch = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jFormattedTextField3 = new javax.swing.JFormattedTextField();
-        jFormattedTextField4 = new javax.swing.JFormattedTextField();
-        jButton4 = new javax.swing.JButton();
+        jTextCheckOutTitle = new javax.swing.JTextField();
+        jTextCheckOutAuthor = new javax.swing.JTextField();
+        jTextCheckOutPatID = new javax.swing.JTextField();
+        jTextCheckOutBorrower = new javax.swing.JTextField();
+        jFormattedCheckOutDate = new javax.swing.JFormattedTextField();
+        jFormattedCheckOutReturnDate = new javax.swing.JFormattedTextField();
+        jButtonCheckOut = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jLabel25 = new javax.swing.JLabel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jButton6 = new javax.swing.JButton();
+        jRadioCheckOutYes = new javax.swing.JRadioButton();
+        jRadioCheckOutNo = new javax.swing.JRadioButton();
+        jButtonCheckOutCancel = new javax.swing.JButton();
+        jButtonCheckOutPatronSearch = new javax.swing.JButton();
+        jLabel28 = new javax.swing.JLabel();
+        jFormattedCheckOutReservationDate = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
@@ -153,12 +182,17 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel3.setText("Book ID:");
 
-        jButton1.setText("OK");
-
-        jButton2.setText("Check-in");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonCheckInSearch.setText("Search");
+        jButtonCheckInSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonCheckInSearchActionPerformed(evt);
+            }
+        });
+
+        jButtonCheckIn.setText("Check-in");
+        jButtonCheckIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckInActionPerformed(evt);
             }
         });
 
@@ -172,7 +206,7 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel8.setText("Borrowed on:");
 
-        jLabel9.setText("Returned on:");
+        jLabel9.setText("Return on:");
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
@@ -189,24 +223,24 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel11.setText("Days overdue:");
 
-        jTextField2.setText("0");
+        jTextDaysOverdue.setText("0");
 
         jLabel12.setText("Penalty(ZMW):");
 
-        jTextField3.setText("0");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTextPenalty.setText("0");
+        jTextPenalty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jTextPenaltyActionPerformed(evt);
             }
         });
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jTextCheckInPatID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jTextCheckInPatIDActionPerformed(evt);
             }
         });
 
-        jButton16.setText("Cancel");
+        jButtonCheckInCancel.setText("Cancel");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,44 +257,44 @@ public class BooksMenu extends javax.swing.JDialog {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextCheckInBorrower, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(jTextCheckInAuthor)
+                            .addComponent(jTextCheckInTitle)
+                            .addComponent(jTextCheckInPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextCheckInBookID, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1))
+                        .addComponent(jButtonCheckInSearch))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                            .addComponent(jFormattedTextField2))))
+                            .addComponent(jFormattedCheckInReturnDate, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                            .addComponent(jFormattedCheckInDateBorrowed))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(jButtonCheckIn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton16))
+                        .addComponent(jButtonCheckInCancel))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(110, 110, 110)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextDaysOverdue, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel12)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextPenalty, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel11)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -271,9 +305,9 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedTextField1, jFormattedTextField2});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedCheckInDateBorrowed, jFormattedCheckInReturnDate});
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextField5, jTextField6, jTextField7});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jTextCheckInAuthor, jTextCheckInBorrower, jTextCheckInTitle});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,33 +316,33 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonCheckInSearch)
+                            .addComponent(jTextCheckInBookID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextCheckInTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextCheckInAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextCheckInBorrower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextCheckInPatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedCheckInDateBorrowed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedCheckInReturnDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -321,26 +355,31 @@ public class BooksMenu extends javax.swing.JDialog {
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextDaysOverdue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(40, 40, 40)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel12)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextPenalty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton16)))
+                                    .addComponent(jButtonCheckIn)
+                                    .addComponent(jButtonCheckInCancel)))
                             .addComponent(jSeparator1))
                         .addContainerGap())))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFormattedTextField1, jFormattedTextField2});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jFormattedCheckInDateBorrowed, jFormattedCheckInReturnDate});
 
         jTabbedPane1.addTab("Check-in", jPanel1);
 
         jLabel13.setText("Book ID:");
 
-        jButton3.setText("OK");
+        jButtonCheckOutSearch.setText("Search");
+        jButtonCheckOutSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckOutSearchActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Book Title:");
 
@@ -348,51 +387,67 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel16.setText("Patron ID:");
 
-        jLabel17.setText("Borrower:");
+        jLabel17.setText("Borrowed By:");
 
-        jLabel18.setText("Borrowed On:");
+        jLabel18.setText("Date:");
 
         jLabel19.setText("Due Date:");
 
-        jTextField11.addActionListener(new java.awt.event.ActionListener() {
+        jTextCheckOutPatID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField11ActionPerformed(evt);
+                jTextCheckOutPatIDActionPerformed(evt);
             }
         });
 
-        jTextField12.addActionListener(new java.awt.event.ActionListener() {
+        jTextCheckOutBorrower.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField12ActionPerformed(evt);
+                jTextCheckOutBorrowerActionPerformed(evt);
             }
         });
 
-        jFormattedTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jFormattedCheckOutDate.setEditable(false);
+        jFormattedCheckOutDate.setEnabled(false);
+        jFormattedCheckOutDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField3ActionPerformed(evt);
+                jFormattedCheckOutDateActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Check-out");
+        jButtonCheckOut.setText("Check-out");
+        jButtonCheckOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckOutActionPerformed(evt);
+            }
+        });
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         jLabel25.setText("Existing Reservation");
 
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText("Yes");
-        jRadioButton3.setEnabled(false);
-
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setSelected(true);
-        jRadioButton4.setText("No");
-        jRadioButton4.setEnabled(false);
-
-        jButton6.setText("Cancel");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(jRadioCheckOutYes);
+        jRadioCheckOutYes.setText("Yes");
+        jRadioCheckOutYes.setEnabled(false);
+        jRadioCheckOutYes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                jRadioCheckOutYesActionPerformed(evt);
             }
         });
+
+        buttonGroup2.add(jRadioCheckOutNo);
+        jRadioCheckOutNo.setSelected(true);
+        jRadioCheckOutNo.setText("No");
+        jRadioCheckOutNo.setEnabled(false);
+
+        jButtonCheckOutCancel.setText("Cancel");
+        jButtonCheckOutCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckOutCancelActionPerformed(evt);
+            }
+        });
+
+        jButtonCheckOutPatronSearch.setText("Search");
+
+        jLabel28.setText("Reservation Date");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -410,35 +465,42 @@ public class BooksMenu extends javax.swing.JDialog {
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
-                    .addComponent(jTextField10)
+                    .addComponent(jTextCheckOutTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
+                    .addComponent(jTextCheckOutAuthor)
+                    .addComponent(jTextCheckOutBorrower)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jFormattedTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                        .addComponent(jFormattedTextField3, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(jFormattedCheckOutReturnDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                        .addComponent(jFormattedCheckOutDate, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextCheckOutBookID, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(65, 65, 65))
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField12))
+                        .addComponent(jButtonCheckOutSearch))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTextCheckOutPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addComponent(jButtonCheckOutPatronSearch)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 21, Short.MAX_VALUE)
+                        .addComponent(jButtonCheckOut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonCheckOutCancel))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel25)
-                            .addComponent(jRadioButton4)
-                            .addComponent(jRadioButton3))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton6)
-                        .addContainerGap())))
+                            .addComponent(jRadioCheckOutNo)
+                            .addComponent(jRadioCheckOutYes)
+                            .addComponent(jLabel28)
+                            .addComponent(jFormattedCheckOutReservationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
+
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedCheckOutDate, jFormattedCheckOutReservationDate, jFormattedCheckOutReturnDate});
+
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -450,43 +512,48 @@ public class BooksMenu extends javax.swing.JDialog {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13)
-                                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton3))
+                                    .addComponent(jTextCheckOutBookID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonCheckOutSearch))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel14)
-                                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextCheckOutTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel15)
-                                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextCheckOutAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel16)
-                                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextCheckOutPatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonCheckOutPatronSearch))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel17)
-                                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextCheckOutBorrower, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel18)
-                                    .addComponent(jFormattedTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jFormattedCheckOutDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel19)
-                                    .addComponent(jFormattedTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jFormattedCheckOutReturnDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton3)
+                                .addComponent(jRadioCheckOutYes)
                                 .addGap(17, 17, 17)
-                                .addComponent(jRadioButton4)
+                                .addComponent(jRadioCheckOutNo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel28)
+                                .addGap(18, 18, 18)
+                                .addComponent(jFormattedCheckOutReservationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton4)
-                                    .addComponent(jButton6))))
+                                    .addComponent(jButtonCheckOut)
+                                    .addComponent(jButtonCheckOutCancel))))
                         .addContainerGap())))
         );
 
@@ -553,7 +620,7 @@ public class BooksMenu extends javax.swing.JDialog {
                         .addComponent(jButton7)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton8)
-                .addGap(6, 6, 6))
+                .addContainerGap())
         );
 
         jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedTextField5, jFormattedTextField6});
@@ -648,7 +715,7 @@ public class BooksMenu extends javax.swing.JDialog {
                         .addComponent(jTextAuthor)
                         .addComponent(jTextISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(188, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonAddBook)
@@ -745,7 +812,7 @@ public class BooksMenu extends javax.swing.JDialog {
                         .addComponent(jTextField26)
                         .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton10)
@@ -838,7 +905,7 @@ public class BooksMenu extends javax.swing.JDialog {
                         .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextField31, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
                         .addComponent(jTextField32)))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton13)
@@ -888,11 +955,12 @@ public class BooksMenu extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 549, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -905,7 +973,7 @@ public class BooksMenu extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -915,30 +983,36 @@ public class BooksMenu extends javax.swing.JDialog {
 
     // Check-In Tab
     // Finish will save changes and clear all fields (dialog notifying user of the same)
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonCheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckInActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonCheckInActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jTextPenaltyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPenaltyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jTextPenaltyActionPerformed
 
-    private void jTextField12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField12ActionPerformed
+    private void jTextCheckOutBorrowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCheckOutBorrowerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField12ActionPerformed
+    }//GEN-LAST:event_jTextCheckOutBorrowerActionPerformed
 
-    private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed
+    private void jTextCheckOutPatIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCheckOutPatIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField11ActionPerformed
+    }//GEN-LAST:event_jTextCheckOutPatIDActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jTextCheckInPatIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCheckInPatIDActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jTextCheckInPatIDActionPerformed
 
-    private void jFormattedTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField3ActionPerformed
+    // Set the current date
+    private void jFormattedCheckOutDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedCheckOutDateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jFormattedTextField3ActionPerformed
+        /*DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        currentDate = dateFormat.format(date);
+        jFormattedCheckOutDate.setText(currentDate);
+        */
+    }//GEN-LAST:event_jFormattedCheckOutDateActionPerformed
 
     private void jTextField25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField25ActionPerformed
         // TODO add your handling code here:
@@ -966,12 +1040,6 @@ public class BooksMenu extends javax.swing.JDialog {
     Connection conn = null;
     Statement stmt = null;
     
-    // Get the entered data
-    String title; 
-    String author;
-    String isbn;
-    String category;
-    String insertBook;
     
 
     // Add button inserts the new record to the database
@@ -1031,13 +1099,154 @@ public class BooksMenu extends javax.swing.JDialog {
        
     }//GEN-LAST:event_jButtonAddBookActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButtonCheckOutCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutCancelActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_jButtonCheckOutCancelActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jButtonCheckInSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckInSearchActionPerformed
+        // TODO add your handling code here:
+        // Search for a record to check-in
+        
+        jTextCheckInTitle.setText("");
+        jTextCheckInAuthor.setText("");
+        jTextCheckInBorrower.setText("");
+        jTextCheckInPatID.setText("");
+        jFormattedCheckInDateBorrowed.setText("");
+        jFormattedCheckInReturnDate.setText("");
+        jTextDaysOverdue.setText("0");
+        jTextPenalty.setText("0");
+        
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        bookID = jTextCheckInBookID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(bookID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+                
+        search = "SELECT * FROM book WHERE book_id = " + bookID + " ";
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+        jTextCheckInTitle.setText(rs.getString("title"));
+        jTextCheckInAuthor.setText(rs.getString("author"));
+        
+        
+        } // end while
+        
+        
+        String test = jTextCheckInTitle.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+           
+           status = 1;
+        }
+        
+        
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+    }//GEN-LAST:event_jButtonCheckInSearchActionPerformed
+
+    private void jButtonCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButtonCheckOutActionPerformed
+
+    private void jButtonCheckOutSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutSearchActionPerformed
+        // TODO add your handling code here:
+        // Search for a record to check-out
+        
+        jTextCheckOutTitle.setText("");
+        jTextCheckOutAuthor.setText("");
+        jTextCheckOutBorrower.setText("");
+        jTextCheckOutPatID.setText("");
+        jFormattedCheckOutReservationDate.setText("");
+        jFormattedCheckOutReturnDate.setText("");
+        reservationStatus = "N";
+        // date
+        DateFormat df;
+        df = new SimpleDateFormat("yyyy-MM-dd");
+        
+        
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        bookID = jTextCheckOutBookID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(bookID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+              
+        }
+        else{
+                
+        search = "SELECT * FROM book WHERE book_id = " + bookID + " ";
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+        jTextCheckOutTitle.setText(rs.getString("title"));
+        jTextCheckOutAuthor.setText(rs.getString("author"));
+        
+        reservationStatus = rs.getString("reserved");
+        
+        // if book is reserved, show in radio button group
+        if (reservationStatus.equals("Y")){
+           jRadioCheckOutYes.setSelected(true);
+           reservationDate = df.format(rs.getDate("reservation_date"));
+           jFormattedCheckOutReservationDate.setText(reservationDate);
+           reservationStatus = "N";
+        } 
+        
+        } // end while
+        
+        
+       
+        
+        String test = jTextCheckOutTitle.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+           
+           status = 1;
+        }
+        
+        
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+        
+    }//GEN-LAST:event_jButtonCheckOutSearchActionPerformed
+
+    private void jRadioCheckOutYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioCheckOutYesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioCheckOutYesActionPerformed
      // end adding book
     
     /**
@@ -1083,30 +1292,32 @@ public class BooksMenu extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAddBook;
+    private javax.swing.JButton jButtonCheckIn;
+    private javax.swing.JButton jButtonCheckInCancel;
+    private javax.swing.JButton jButtonCheckInSearch;
+    private javax.swing.JButton jButtonCheckOut;
+    private javax.swing.JButton jButtonCheckOutCancel;
+    private javax.swing.JButton jButtonCheckOutPatronSearch;
+    private javax.swing.JButton jButtonCheckOutSearch;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
-    private javax.swing.JFormattedTextField jFormattedTextField3;
-    private javax.swing.JFormattedTextField jFormattedTextField4;
+    private javax.swing.JFormattedTextField jFormattedCheckInDateBorrowed;
+    private javax.swing.JFormattedTextField jFormattedCheckInReturnDate;
+    private javax.swing.JFormattedTextField jFormattedCheckOutDate;
+    private javax.swing.JFormattedTextField jFormattedCheckOutReservationDate;
+    private javax.swing.JFormattedTextField jFormattedCheckOutReturnDate;
     private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JFormattedTextField jFormattedTextField6;
     private javax.swing.JLabel jLabel1;
@@ -1129,6 +1340,7 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
@@ -1158,40 +1370,40 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioCheckOutNo;
+    private javax.swing.JRadioButton jRadioCheckOutYes;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextAuthor;
     private javax.swing.JTextField jTextBookTitle;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextCheckInAuthor;
+    private javax.swing.JTextField jTextCheckInBookID;
+    private javax.swing.JTextField jTextCheckInBorrower;
+    private javax.swing.JTextField jTextCheckInPatID;
+    private javax.swing.JTextField jTextCheckInTitle;
+    private javax.swing.JTextField jTextCheckOutAuthor;
+    private javax.swing.JTextField jTextCheckOutBookID;
+    private javax.swing.JTextField jTextCheckOutBorrower;
+    private javax.swing.JTextField jTextCheckOutPatID;
+    private javax.swing.JTextField jTextCheckOutTitle;
+    private javax.swing.JTextField jTextDaysOverdue;
     private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField24;
     private javax.swing.JTextField jTextField25;
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
     private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField34;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField jTextISBN;
+    private javax.swing.JTextField jTextPenalty;
     // End of variables declaration//GEN-END:variables
    
     
