@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import static necorlibsys.PatronsMenu.JDBC_DRIVER;
 import java.util.Date;
+import static necorlibsys.PatronsMenu.JDBC_DRIVER;
 
 /**
  *
@@ -30,6 +31,8 @@ public class BooksMenu extends javax.swing.JDialog {
     String currentDate;
     String reservationDate;
     String reservationStatus;
+    String patronID;
+    String patron;
     int status;
     
 
@@ -446,8 +449,16 @@ public class BooksMenu extends javax.swing.JDialog {
         });
 
         jButtonCheckOutPatronSearch.setText("Search");
+        jButtonCheckOutPatronSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckOutPatronSearchActionPerformed(evt);
+            }
+        });
 
         jLabel28.setText("Reservation Date");
+
+        jFormattedCheckOutReservationDate.setEditable(false);
+        jFormattedCheckOutReservationDate.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -468,9 +479,8 @@ public class BooksMenu extends javax.swing.JDialog {
                     .addComponent(jTextCheckOutTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE)
                     .addComponent(jTextCheckOutAuthor)
                     .addComponent(jTextCheckOutBorrower)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jFormattedCheckOutReturnDate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                        .addComponent(jFormattedCheckOutDate, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jFormattedCheckOutReturnDate, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(jFormattedCheckOutDate)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTextCheckOutBookID, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1101,6 +1111,7 @@ public class BooksMenu extends javax.swing.JDialog {
 
     private void jButtonCheckOutCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutCancelActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButtonCheckOutCancelActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -1181,6 +1192,11 @@ public class BooksMenu extends javax.swing.JDialog {
         jFormattedCheckOutReservationDate.setText("");
         jFormattedCheckOutReturnDate.setText("");
         reservationStatus = "N";
+        jTextCheckOutPatID.setEnabled(true);
+               jButtonCheckOutPatronSearch.setEnabled(true);
+               jTextCheckOutBorrower.setEnabled(true);
+               jFormattedCheckOutReturnDate.setEnabled(true);
+               jButtonCheckOut.setEnabled(true);
         // date
         DateFormat df;
         df = new SimpleDateFormat("yyyy-MM-dd");
@@ -1219,6 +1235,14 @@ public class BooksMenu extends javax.swing.JDialog {
            reservationDate = df.format(rs.getDate("reservation_date"));
            jFormattedCheckOutReservationDate.setText(reservationDate);
            reservationStatus = "N";
+           
+           if(currentDate.equals(reservationDate)){
+               jTextCheckOutPatID.setEnabled(false);
+               jButtonCheckOutPatronSearch.setEnabled(false);
+               jTextCheckOutBorrower.setEnabled(false);
+               jFormattedCheckOutReturnDate.setEnabled(false);
+               jButtonCheckOut.setEnabled(false);
+           }
         } 
         
         } // end while
@@ -1247,6 +1271,60 @@ public class BooksMenu extends javax.swing.JDialog {
     private void jRadioCheckOutYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioCheckOutYesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioCheckOutYesActionPerformed
+
+    private void jButtonCheckOutPatronSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutPatronSearchActionPerformed
+        // TODO add your handling code here:
+        // Search for a record to check-out
+        
+        //initialize text fields here
+         jTextCheckOutBorrower.setText("");
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        patronID = jTextCheckOutPatID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(patronID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+                
+        search = "SELECT * FROM patron WHERE patron_id = " + patronID + " ";
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+            if ((rs.getString("initial").equals(null)) || (rs.getString("initial").equals(""))){
+                patron = (rs.getString("first_name")) + " " + (rs.getString("last_name"));
+            } else {
+        patron = (rs.getString("first_name")) + " " + (rs.getString("initial")) + ". " + (rs.getString("last_name"));
+            }
+            jTextCheckOutBorrower.setText(patron);
+        
+        } // end while
+        
+        
+        String test = jTextCheckOutBorrower.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+           
+           status = 1;
+        }
+        
+        
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+    }//GEN-LAST:event_jButtonCheckOutPatronSearchActionPerformed
      // end adding book
     
     /**
