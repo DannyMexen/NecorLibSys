@@ -7,10 +7,14 @@ package necorlibsys;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import static necorlibsys.PatronsMenu.JDBC_DRIVER;
 import java.util.Date;
+
 import static necorlibsys.PatronsMenu.JDBC_DRIVER;
 
 /**
@@ -31,6 +35,9 @@ public class BooksMenu extends javax.swing.JDialog {
     String currentDate;
     String reservationDate;
     String reservationStatus;
+    String bookStatus;
+    String dueDate;
+    String availabilityDate;
     String patronID;
     String patron;
     int status;
@@ -119,6 +126,8 @@ public class BooksMenu extends javax.swing.JDialog {
         jButtonCheckOutPatronSearch = new javax.swing.JButton();
         jLabel28 = new javax.swing.JLabel();
         jFormattedCheckOutReservationDate = new javax.swing.JFormattedTextField();
+        jLabel33 = new javax.swing.JLabel();
+        jFormattedcheckOutAvailablility = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jTextField13 = new javax.swing.JTextField();
@@ -396,12 +405,17 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel19.setText("Due Date:");
 
+        jTextCheckOutTitle.setEditable(false);
+
+        jTextCheckOutAuthor.setEditable(false);
+
         jTextCheckOutPatID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCheckOutPatIDActionPerformed(evt);
             }
         });
 
+        jTextCheckOutBorrower.setEditable(false);
         jTextCheckOutBorrower.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCheckOutBorrowerActionPerformed(evt);
@@ -409,12 +423,13 @@ public class BooksMenu extends javax.swing.JDialog {
         });
 
         jFormattedCheckOutDate.setEditable(false);
-        jFormattedCheckOutDate.setEnabled(false);
         jFormattedCheckOutDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFormattedCheckOutDateActionPerformed(evt);
             }
         });
+
+        jFormattedCheckOutReturnDate.setEditable(false);
 
         jButtonCheckOut.setText("Check-out");
         jButtonCheckOut.addActionListener(new java.awt.event.ActionListener() {
@@ -458,7 +473,15 @@ public class BooksMenu extends javax.swing.JDialog {
         jLabel28.setText("Reservation Date");
 
         jFormattedCheckOutReservationDate.setEditable(false);
-        jFormattedCheckOutReservationDate.setEnabled(false);
+
+        jLabel33.setText("Available on");
+
+        jFormattedcheckOutAvailablility.setEditable(false);
+        jFormattedcheckOutAvailablility.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedcheckOutAvailablilityActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -504,12 +527,14 @@ public class BooksMenu extends javax.swing.JDialog {
                             .addComponent(jRadioCheckOutNo)
                             .addComponent(jRadioCheckOutYes)
                             .addComponent(jLabel28)
-                            .addComponent(jFormattedCheckOutReservationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jFormattedCheckOutReservationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel33)
+                            .addComponent(jFormattedcheckOutAvailablility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedCheckOutDate, jFormattedCheckOutReservationDate, jFormattedCheckOutReturnDate});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedCheckOutDate, jFormattedCheckOutReservationDate, jFormattedCheckOutReturnDate, jFormattedcheckOutAvailablility});
 
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,6 +585,10 @@ public class BooksMenu extends javax.swing.JDialog {
                                 .addComponent(jLabel28)
                                 .addGap(18, 18, 18)
                                 .addComponent(jFormattedCheckOutReservationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel33)
+                                .addGap(18, 18, 18)
+                                .addComponent(jFormattedcheckOutAvailablility, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButtonCheckOut)
@@ -1190,6 +1219,7 @@ public class BooksMenu extends javax.swing.JDialog {
         jTextCheckOutBorrower.setText("");
         jTextCheckOutPatID.setText("");
         jFormattedCheckOutReservationDate.setText("");
+        jFormattedcheckOutAvailablility.setText("");
         jFormattedCheckOutReturnDate.setText("");
         reservationStatus = "N";
         jTextCheckOutPatID.setEnabled(true);
@@ -1197,6 +1227,7 @@ public class BooksMenu extends javax.swing.JDialog {
                jTextCheckOutBorrower.setEnabled(true);
                jFormattedCheckOutReturnDate.setEnabled(true);
                jButtonCheckOut.setEnabled(true);
+               jRadioCheckOutNo.setSelected(true);
         // date
         DateFormat df;
         df = new SimpleDateFormat("yyyy-MM-dd");
@@ -1226,15 +1257,31 @@ public class BooksMenu extends javax.swing.JDialog {
         while(rs.next()){
         jTextCheckOutTitle.setText(rs.getString("title"));
         jTextCheckOutAuthor.setText(rs.getString("author"));
-        
+        bookStatus = rs.getString("status");
         reservationStatus = rs.getString("reserved");
         
+        
+        if(bookStatus.equals("Checked-out")){
+            dueDate = df.format(rs.getDate("return_date"));
+            jFormattedcheckOutAvailablility.setText(dueDate);
+            int warning = JOptionPane.showConfirmDialog(null, "This book is unavailable for check-out.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE); 
+            jTextCheckOutBookID.setText("");
+            
+            break;
+            
+        }
+     
+              
         // if book is reserved, show in radio button group
         if (reservationStatus.equals("Y")){
            jRadioCheckOutYes.setSelected(true);
            reservationDate = df.format(rs.getDate("reservation_date"));
+           availabilityDate = df.format(rs.getDate("availability"));
            jFormattedCheckOutReservationDate.setText(reservationDate);
            reservationStatus = "N";
+           
+           jFormattedcheckOutAvailablility.setText(availabilityDate);
            
            if(currentDate.equals(reservationDate)){
                jTextCheckOutPatID.setEnabled(false);
@@ -1245,18 +1292,21 @@ public class BooksMenu extends javax.swing.JDialog {
            }
         } 
         
+        
+        
         } // end while
         
         
-       
         
-        String test = jTextCheckOutTitle.getText();
+       String test = jTextCheckOutTitle.getText();
         if(test.isEmpty()){ 
            int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
             JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
-           
+           jTextCheckOutBookID.setText("");
            status = 1;
         }
+        
+        
         
         
         
@@ -1279,6 +1329,7 @@ public class BooksMenu extends javax.swing.JDialog {
         //initialize text fields here
          jTextCheckOutBorrower.setText("");
         
+        
         try{
         Class.forName(JDBC_DRIVER);
         }catch(ClassNotFoundException e){}
@@ -1299,7 +1350,7 @@ public class BooksMenu extends javax.swing.JDialog {
         ResultSet rs = stmt.executeQuery(search);
         
         while(rs.next()){
-            if ((rs.getString("initial").equals(null)) || (rs.getString("initial").equals(""))){
+            if ((rs.getString("initial") == null) || (rs.getString("initial").equals(""))){
                 patron = (rs.getString("first_name")) + " " + (rs.getString("last_name"));
             } else {
         patron = (rs.getString("first_name")) + " " + (rs.getString("initial")) + ". " + (rs.getString("last_name"));
@@ -1309,15 +1360,21 @@ public class BooksMenu extends javax.swing.JDialog {
         } // end while
         
         
+        
         String test = jTextCheckOutBorrower.getText();
         if(test.isEmpty()){ 
            int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
             JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
            
            status = 1;
-        }
-        
-        
+        } else {
+            
+            SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");            
+            Calendar c = Calendar.getInstance();        
+            c.add(Calendar.DATE, 3);  // number of days to add      
+            dueDate = (String)(formattedDate.format(c.getTime()));
+            jFormattedCheckOutReturnDate.setText(dueDate);
+        }      
         
         }
         conn.close();
@@ -1325,6 +1382,10 @@ public class BooksMenu extends javax.swing.JDialog {
         
         }catch(SQLException se){}
     }//GEN-LAST:event_jButtonCheckOutPatronSearchActionPerformed
+
+    private void jFormattedcheckOutAvailablilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedcheckOutAvailablilityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedcheckOutAvailablilityActionPerformed
      // end adding book
     
     /**
@@ -1398,6 +1459,7 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedCheckOutReturnDate;
     private javax.swing.JFormattedTextField jFormattedTextField5;
     private javax.swing.JFormattedTextField jFormattedTextField6;
+    private javax.swing.JFormattedTextField jFormattedcheckOutAvailablility;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1424,6 +1486,7 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;

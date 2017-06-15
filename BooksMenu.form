@@ -426,6 +426,8 @@
                                   <Component id="jRadioCheckOutYes" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                   <Component id="jFormattedCheckOutReservationDate" linkSize="6" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFormattedcheckOutAvailablility" linkSize="6" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -491,6 +493,10 @@
                                       <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jFormattedCheckOutReservationDate" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jLabel33" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="jFormattedcheckOutAvailablility" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
                                           <Component id="jButtonCheckOut" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -552,8 +558,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCheckOutTitle">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCheckOutAuthor">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCheckOutPatID">
               <Events>
@@ -561,6 +573,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextCheckOutBorrower">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextCheckOutBorrowerActionPerformed"/>
               </Events>
@@ -568,13 +583,15 @@
             <Component class="javax.swing.JFormattedTextField" name="jFormattedCheckOutDate">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedCheckOutDateActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jFormattedCheckOutReturnDate">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonCheckOut">
               <Properties>
@@ -640,8 +657,20 @@
             <Component class="javax.swing.JFormattedTextField" name="jFormattedCheckOutReservationDate">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel33">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Available on"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="jFormattedcheckOutAvailablility">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jFormattedcheckOutAvailablilityActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
