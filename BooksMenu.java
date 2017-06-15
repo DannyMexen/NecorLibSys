@@ -40,8 +40,12 @@ public class BooksMenu extends javax.swing.JDialog {
     String availabilityDate;
     String patronID;
     String patron;
+    String checkOut;
     int status;
     
+    Connection conn = null;
+    Statement stmt = null;
+    PreparedStatement pStmt = null;
 
     /**
      * Creates new form BooksMenu
@@ -1076,8 +1080,7 @@ public class BooksMenu extends javax.swing.JDialog {
     static final String USER = "root";
     static final String PASS = "R00t.paribas";
     
-    Connection conn = null;
-    Statement stmt = null;
+   
     
     
 
@@ -1208,8 +1211,73 @@ public class BooksMenu extends javax.swing.JDialog {
     private void jButtonCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutActionPerformed
         // TODO add your handling code here:
         
+        
+        if((jTextCheckOutBookID.getText().isEmpty()) || (jTextCheckOutPatID.getText().isEmpty())){
+        int warning = JOptionPane.showConfirmDialog(null, "Please enter ID(s).", "Attention.",
+        JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if((jTextCheckOutTitle.getText().isEmpty()) && (!((jTextCheckOutBookID.getText().isEmpty()) || (jTextCheckOutPatID.getText().isEmpty())))){
+            int warning = JOptionPane.showConfirmDialog(null, "Nothing to check-out.", "Attention.",
+        JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else {
+            JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Check-out this book?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // edit the patron if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+            bookStatus = "Checked-out";
+            patronID = jTextCheckOutPatID.getText();
+            
+            // Dates 
+            
+            currentDate = jFormattedCheckOutDate.getText();
+            dueDate = jFormattedCheckOutReturnDate.getText();
+        
+            checkOut = "UPDATE book SET status = ?, patron_patron_id = ?, borrow_date = ?, return_date = ? WHERE book_id = ?";
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        pStmt = conn.prepareStatement(checkOut);
+        // update the record
+        
+        
+        pStmt.setString(1, bookStatus);
+        pStmt.setString(2, patronID);
+        pStmt.setString(3, currentDate);
+        pStmt.setString(4, dueDate); 
+        pStmt.setString(5, bookID);
+        
+        pStmt.executeUpdate();
+        conn.close();
+            } catch(SQLException se){}
+        
+        jTextCheckOutBookID.setText("");
+        jTextCheckOutTitle.setText("");
+        jTextCheckOutAuthor.setText("");
+        jTextCheckOutBorrower.setText("");
+        jTextCheckOutPatID.setText("");
+        jFormattedCheckOutReservationDate.setText("");
+        jFormattedcheckOutAvailablility.setText("");
+        jFormattedCheckOutReturnDate.setText("");
+        reservationStatus = "N";
+        jRadioCheckOutNo.setSelected(true);
+        
+        }    
+        }   
     }//GEN-LAST:event_jButtonCheckOutActionPerformed
-
+    // end check-out
     private void jButtonCheckOutSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutSearchActionPerformed
         // TODO add your handling code here:
         // Search for a record to check-out
@@ -1222,12 +1290,7 @@ public class BooksMenu extends javax.swing.JDialog {
         jFormattedcheckOutAvailablility.setText("");
         jFormattedCheckOutReturnDate.setText("");
         reservationStatus = "N";
-        jTextCheckOutPatID.setEnabled(true);
-               jButtonCheckOutPatronSearch.setEnabled(true);
-               jTextCheckOutBorrower.setEnabled(true);
-               jFormattedCheckOutReturnDate.setEnabled(true);
-               jButtonCheckOut.setEnabled(true);
-               jRadioCheckOutNo.setSelected(true);
+        
         // date
         DateFormat df;
         df = new SimpleDateFormat("yyyy-MM-dd");
