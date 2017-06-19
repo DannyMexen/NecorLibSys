@@ -6,23 +6,29 @@
 package necorlibsys;
 import java.sql.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-import static necorlibsys.PatronsMenu.JDBC_DRIVER;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-import static necorlibsys.PatronsMenu.JDBC_DRIVER;
 
 /**
  *
  * @author mexen
  */
 public class BooksMenu extends javax.swing.JDialog {
+    // Database
+    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    static final String DB_URL = "jdbc:mysql://localhost/necorlibsys";
     
+    static final String USER = "root";
+    static final String PASS = "R00t.paribas";
+    
+    Date date;
     
     // Variables to work with
     String title; 
@@ -32,16 +38,27 @@ public class BooksMenu extends javax.swing.JDialog {
     String insertBook;
     String bookID;
     String search;
+    String patronDetails;
     String currentDate;
     String reservationDate;
     String reservationStatus;
     String bookStatus;
+    String dateBorrowed;
     String dueDate;
     String availabilityDate;
     String patronID;
     String patron;
+    String firstName;
+    String initial;
+    String lastName;
+    String email;
     String checkOut;
+    String daysDue;
+    String penalty;
     int status;
+    int daysOverdue;
+    int overdueRate = 5;
+    int charge;
     
     Connection conn = null;
     Statement stmt = null;
@@ -57,7 +74,7 @@ public class BooksMenu extends javax.swing.JDialog {
         initComponents();
         
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
+        date = new Date();
         currentDate = dateFormat.format(date);
         jFormattedCheckOutDate.setText(currentDate);
         jFormattedCheckOutReturnDate.setText("");
@@ -92,8 +109,8 @@ public class BooksMenu extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioCheckInOverdueYes = new javax.swing.JRadioButton();
+        jRadioCheckInOverdueNo = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         jTextDaysOverdue = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -228,21 +245,23 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel10.setText("Overdue");
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Yes");
-        jRadioButton1.setEnabled(false);
+        buttonGroup1.add(jRadioCheckInOverdueYes);
+        jRadioCheckInOverdueYes.setText("Yes");
+        jRadioCheckInOverdueYes.setEnabled(false);
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setSelected(true);
-        jRadioButton2.setText("No");
-        jRadioButton2.setEnabled(false);
+        buttonGroup1.add(jRadioCheckInOverdueNo);
+        jRadioCheckInOverdueNo.setSelected(true);
+        jRadioCheckInOverdueNo.setText("No");
+        jRadioCheckInOverdueNo.setEnabled(false);
 
         jLabel11.setText("Days overdue:");
 
+        jTextDaysOverdue.setEditable(false);
         jTextDaysOverdue.setText("0");
 
         jLabel12.setText("Penalty(ZMW):");
 
+        jTextPenalty.setEditable(false);
         jTextPenalty.setText("0");
         jTextPenalty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,13 +269,29 @@ public class BooksMenu extends javax.swing.JDialog {
             }
         });
 
+        jFormattedCheckInReturnDate.setEditable(false);
+
+        jFormattedCheckInDateBorrowed.setEditable(false);
+
+        jTextCheckInPatID.setEditable(false);
         jTextCheckInPatID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextCheckInPatIDActionPerformed(evt);
             }
         });
 
+        jTextCheckInBorrower.setEditable(false);
+
+        jTextCheckInAuthor.setEditable(false);
+
+        jTextCheckInTitle.setEditable(false);
+
         jButtonCheckInCancel.setText("Cancel");
+        jButtonCheckInCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCheckInCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -315,8 +350,8 @@ public class BooksMenu extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(12, 12, 12)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton2)
-                                    .addComponent(jRadioButton1))))
+                                    .addComponent(jRadioCheckInOverdueNo)
+                                    .addComponent(jRadioCheckInOverdueYes))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -365,9 +400,9 @@ public class BooksMenu extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton1)
+                                .addComponent(jRadioCheckInOverdueYes)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2)
+                                .addComponent(jRadioCheckInOverdueNo)
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
@@ -1073,12 +1108,7 @@ public class BooksMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextAuthorActionPerformed
     
-    // Database
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/necorlibsys";
     
-    static final String USER = "root";
-    static final String PASS = "R00t.paribas";
     
    
     
@@ -1162,7 +1192,8 @@ public class BooksMenu extends javax.swing.JDialog {
         jFormattedCheckInReturnDate.setText("");
         jTextDaysOverdue.setText("0");
         jTextPenalty.setText("0");
-        
+        DateFormat df;
+        df = new SimpleDateFormat("yyyy-MM-dd");
         
         try{
         Class.forName(JDBC_DRIVER);
@@ -1181,12 +1212,74 @@ public class BooksMenu extends javax.swing.JDialog {
         else{
                 
         search = "SELECT * FROM book WHERE book_id = " + bookID + " ";
+        
         ResultSet rs = stmt.executeQuery(search);
+        
+        
+       
         
         while(rs.next()){
         jTextCheckInTitle.setText(rs.getString("title"));
         jTextCheckInAuthor.setText(rs.getString("author"));
+        bookStatus = rs.getString("status");
         
+        
+        if (bookStatus.equals("Checked-in")){
+            int warning = JOptionPane.showConfirmDialog(null, "This book has already been checked-in.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+            jTextCheckInBookID.setText("");
+            break;
+        } else {
+        
+        patronID = String.valueOf(rs.getInt("patron_patron_id"));     
+        patronDetails = "SELECT * FROM patron WHERE patron_id = " + patronID + " ";
+        rs = stmt.executeQuery(patronDetails);
+        
+        while(rs.next()){
+        
+        // Patron ID and name - grab e-mail
+        jTextCheckInPatID.setText(rs.getString("patron_id"));
+        initial = rs.getString("initial");
+        if ((initial == null) || (initial.equals(""))){
+            jTextCheckInBorrower.setText(rs.getString("first_name") + " " + rs.getString("last_name"));
+        } else {
+            jTextCheckInBorrower.setText(rs.getString("first_name") + " " + rs.getString("initial") + ". " + rs.getString("last_name"));
+        }
+       
+        
+        } // end inner while for name
+        
+        rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+        // Dates
+         Date borrowedOn = rs.getDate("borrow_date");
+         Date returnOn = rs.getDate("return_date");
+         Date today = df.parse(currentDate);
+             
+            dateBorrowed = df.format(borrowedOn);
+            dueDate = df.format(returnOn);
+            jFormattedCheckInDateBorrowed.setText(dateBorrowed);
+            jFormattedCheckInReturnDate.setText(dueDate);
+          
+          // if the book is overdue
+            
+            long days = (today.getTime() - returnOn.getTime()) / (24 * 60 * 60 * 1000);
+            daysOverdue = (int) days;
+            charge = daysOverdue * 5;
+            daysDue = String.valueOf(days);
+            penalty = String.valueOf(charge);
+            
+            
+            
+            if (daysOverdue >= 1){
+                jRadioCheckInOverdueYes.setSelected(true);
+                jTextDaysOverdue.setText(daysDue);
+                jTextPenalty.setText(penalty);
+            }  
+            
+        } // end inner while for dates and overdue calculation plus
+        } // end else
         
         } // end while
         
@@ -1205,7 +1298,9 @@ public class BooksMenu extends javax.swing.JDialog {
         conn.close();
         
         
-        }catch(SQLException se){}
+        }catch(SQLException se){} catch (ParseException ex) {
+            Logger.getLogger(BooksMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonCheckInSearchActionPerformed
 
     private void jButtonCheckOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckOutActionPerformed
@@ -1449,6 +1544,11 @@ public class BooksMenu extends javax.swing.JDialog {
     private void jFormattedcheckOutAvailablilityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedcheckOutAvailablilityActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedcheckOutAvailablilityActionPerformed
+
+    private void jButtonCheckInCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckInCancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButtonCheckInCancelActionPerformed
      // end adding book
     
     /**
@@ -1572,8 +1672,8 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioCheckInOverdueNo;
+    private javax.swing.JRadioButton jRadioCheckInOverdueYes;
     private javax.swing.JRadioButton jRadioCheckOutNo;
     private javax.swing.JRadioButton jRadioCheckOutYes;
     private javax.swing.JSeparator jSeparator1;
