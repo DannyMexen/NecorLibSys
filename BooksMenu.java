@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static necorlibsys.PatronsMenu.JDBC_DRIVER;
 
 
 /**
@@ -40,8 +41,12 @@ public class BooksMenu extends javax.swing.JDialog {
     String search;
     String patronDetails;
     String currentDate;
+    String reserve;
+    String reservationID;
+    String collectionDate;
     String reservationDate;
     String reservationStatus;
+    String cancelReservation;
     String bookStatus;
     String dateBorrowed;
     String dueDate;
@@ -56,6 +61,8 @@ public class BooksMenu extends javax.swing.JDialog {
     String daysDue;
     String penalty;
     String checkIn;
+    String fiction = "Fiction";
+    String nonFiction = "Non-Fiction";
     int status;
     int daysOverdue;
     int overdueRate = 5;
@@ -169,6 +176,7 @@ public class BooksMenu extends javax.swing.JDialog {
         jButtonReserve = new javax.swing.JButton();
         jButtonReservationCancel = new javax.swing.JButton();
         jButtonReservationPatronSearch = new javax.swing.JButton();
+        jButtonReservationCancelReservation = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -179,21 +187,21 @@ public class BooksMenu extends javax.swing.JDialog {
         jTextAuthor = new javax.swing.JTextField();
         jTextISBN = new javax.swing.JTextField();
         jButton15 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxCategory = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jTextField24 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
-        jTextField25 = new javax.swing.JTextField();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField28 = new javax.swing.JTextField();
+        jTextEditBookID = new javax.swing.JTextField();
+        jButtonBookEditSearch = new javax.swing.JButton();
+        jTextEditTitle = new javax.swing.JTextField();
+        jTextEditAuthor = new javax.swing.JTextField();
+        jTextEditISBN = new javax.swing.JTextField();
         jButton10 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jButtonBookEditCancel = new javax.swing.JButton();
+        jComboBoxEditCategory = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
         jTextField27 = new javax.swing.JTextField();
@@ -677,6 +685,11 @@ public class BooksMenu extends javax.swing.JDialog {
         jFormattedReservationDateCollection.setEditable(false);
 
         jButtonReserve.setText("Reserve");
+        jButtonReserve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReserveActionPerformed(evt);
+            }
+        });
 
         jButtonReservationCancel.setText("Cancel");
         jButtonReservationCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -690,6 +703,14 @@ public class BooksMenu extends javax.swing.JDialog {
         jButtonReservationPatronSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonReservationPatronSearchActionPerformed(evt);
+            }
+        });
+
+        jButtonReservationCancelReservation.setText("Clear Reservation");
+        jButtonReservationCancelReservation.setEnabled(false);
+        jButtonReservationCancelReservation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservationCancelReservationActionPerformed(evt);
             }
         });
 
@@ -716,17 +737,23 @@ public class BooksMenu extends javax.swing.JDialog {
                             .addComponent(jLabel22)
                             .addComponent(jLabel21))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextReservationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                            .addComponent(jTextReservationAuthor)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jTextReservationPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButtonReservationPatronSearch))
-                            .addComponent(jTextReservationPatron)
-                            .addComponent(jFormattedReservationDateCollection, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedReservationDateAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextReservationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                                    .addComponent(jTextReservationAuthor)
+                                    .addGroup(jPanel6Layout.createSequentialGroup()
+                                        .addComponent(jTextReservationPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButtonReservationPatronSearch))
+                                    .addComponent(jTextReservationPatron)
+                                    .addComponent(jFormattedReservationDateAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jFormattedReservationDateCollection, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                                .addComponent(jButtonReservationCancelReservation)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jButtonReserve)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonReservationCancel)
@@ -773,7 +800,8 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonReserve)
-                    .addComponent(jButtonReservationCancel))
+                    .addComponent(jButtonReservationCancel)
+                    .addComponent(jButtonReservationCancelReservation))
                 .addContainerGap())
         );
 
@@ -804,8 +832,8 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jButton15.setText("Cancel");
 
-        jComboBox1.setMaximumRowCount(2);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiction", "Non-Fiction" }));
+        jComboBoxCategory.setMaximumRowCount(2);
+        jComboBoxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiction", "Non-Fiction" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -824,7 +852,7 @@ public class BooksMenu extends javax.swing.JDialog {
                         .addComponent(jTextBookTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                         .addComponent(jTextAuthor)
                         .addComponent(jTextISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(188, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -851,7 +879,7 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 153, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -873,29 +901,39 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel39.setText("Category:");
 
-        jButton9.setText("Search");
-
-        jTextField25.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBookEditSearch.setText("Search");
+        jButtonBookEditSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField25ActionPerformed(evt);
+                jButtonBookEditSearchActionPerformed(evt);
             }
         });
 
-        jTextField28.addActionListener(new java.awt.event.ActionListener() {
+        jTextEditTitle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField28ActionPerformed(evt);
+                jTextEditTitleActionPerformed(evt);
+            }
+        });
+
+        jTextEditISBN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextEditISBNActionPerformed(evt);
             }
         });
 
         jButton10.setText("Save");
 
-        jButton14.setText("Cancel");
-
-        jComboBox2.setMaximumRowCount(2);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiction", "Non-Fiction" }));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBookEditCancel.setText("Cancel");
+        jButtonBookEditCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jButtonBookEditCancelActionPerformed(evt);
+            }
+        });
+
+        jComboBoxEditCategory.setMaximumRowCount(2);
+        jComboBoxEditCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fiction", "Non-Fiction" }));
+        jComboBoxEditCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxEditCategoryActionPerformed(evt);
             }
         });
 
@@ -914,20 +952,20 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextEditBookID, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton9))
+                        .addComponent(jButtonBookEditSearch))
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField25, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
-                        .addComponent(jTextField26)
-                        .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextEditTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+                        .addComponent(jTextEditAuthor)
+                        .addComponent(jTextEditISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton14)
+                .addComponent(jButtonBookEditCancel)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -936,28 +974,28 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel34)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton9))
+                    .addComponent(jTextEditBookID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBookEditSearch))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEditTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel36)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEditAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel38)
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEditISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton10)
-                    .addComponent(jButton14))
+                    .addComponent(jButtonBookEditCancel))
                 .addContainerGap())
         );
 
@@ -1175,13 +1213,13 @@ public class BooksMenu extends javax.swing.JDialog {
         */
     }//GEN-LAST:event_jFormattedCheckOutDateActionPerformed
 
-    private void jTextField25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField25ActionPerformed
+    private void jTextEditTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEditTitleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField25ActionPerformed
+    }//GEN-LAST:event_jTextEditTitleActionPerformed
 
-    private void jTextField28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField28ActionPerformed
+    private void jTextEditISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEditISBNActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField28ActionPerformed
+    }//GEN-LAST:event_jTextEditISBNActionPerformed
 
     private void jTextField32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField32ActionPerformed
         // TODO add your handling code here:
@@ -1197,9 +1235,11 @@ public class BooksMenu extends javax.swing.JDialog {
         title = jTextBookTitle.getText();
         author = jTextAuthor.getText();
         isbn = jTextISBN.getText();
-        
-        // get from the combo box
-        //category = jTextCategory.getText();
+        if(jComboBoxCategory.getSelectedItem().equals(fiction)){
+            category = fiction;
+        } else {
+            category = nonFiction;
+        }
         
         insertBook = "INSERT INTO book"+
                 "(title,author,isbn,category)"+
@@ -1255,9 +1295,9 @@ public class BooksMenu extends javax.swing.JDialog {
         dispose();
     }//GEN-LAST:event_jButtonCheckOutCancelActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jComboBoxEditCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxEditCategoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }//GEN-LAST:event_jComboBoxEditCategoryActionPerformed
 
     private void jButtonCheckInSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckInSearchActionPerformed
         // TODO add your handling code here:
@@ -1271,6 +1311,7 @@ public class BooksMenu extends javax.swing.JDialog {
         jFormattedCheckInReturnDate.setText("");
         jTextDaysOverdue.setText("0");
         jTextPenalty.setText("0");
+        
         DateFormat df;
         df = new SimpleDateFormat("yyyy-MM-dd");
         
@@ -1465,6 +1506,7 @@ public class BooksMenu extends javax.swing.JDialog {
         jFormattedcheckOutAvailablility.setText("");
         jFormattedCheckOutReturnDate.setText("");
         reservationStatus = "N";
+        jRadioCheckOutNo.setSelected(true);
         
         // date
         DateFormat df;
@@ -1606,12 +1648,16 @@ public class BooksMenu extends javax.swing.JDialog {
            
            status = 1;
         } else {
-            
+            if(!(reservationDate.isEmpty())){
+                jFormattedCheckOutReturnDate.setText(reservationDate);
+            }
+            else{
             SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");            
             Calendar c = Calendar.getInstance();        
-            c.add(Calendar.DATE, 3);  // number of days to add      
+            c.add(Calendar.DATE, 2);  // number of days to add      
             dueDate = (String)(formattedDate.format(c.getTime()));
             jFormattedCheckOutReturnDate.setText(dueDate);
+            }
         }      
         
         }
@@ -1692,6 +1738,7 @@ public class BooksMenu extends javax.swing.JDialog {
             jTextReservationPatID.setEditable(false);
             jButtonReservationPatronSearch.setEnabled(false);
             jButtonReserve.setEnabled(false);
+            jButtonReservationCancelReservation.setEnabled(true);
             
             available = rs.getDate("availability");
             collect = rs.getDate("reservation_date");
@@ -1723,7 +1770,7 @@ public class BooksMenu extends javax.swing.JDialog {
               
         } else if (reservationStatus.equals("N")) { // end if book has already been checked-out
             
-            
+            jButtonReservationCancelReservation.setEnabled(false);
             jButtonReservationPatronSearch.setEnabled(true);
             jTextReservationPatID.setEditable(true);
             jButtonReservationPatronSearch.setEnabled(true);
@@ -1848,6 +1895,213 @@ public class BooksMenu extends javax.swing.JDialog {
         }catch(SQLException se){}
         
     }//GEN-LAST:event_jButtonReservationPatronSearchActionPerformed
+
+    private void jButtonReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReserveActionPerformed
+        // TODO add your handling code here:
+        // check for empty IDs
+        
+        if((jTextReservationBookID.getText().isEmpty()) || (jTextReservationPatID.getText().isEmpty())){
+        int warning = JOptionPane.showConfirmDialog(null, "Please enter ID(s).", "Attention.",
+        JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if((jTextReservationTitle.getText().isEmpty()) && (!((jTextReservationBookID.getText().isEmpty()) || (jTextCheckOutPatID.getText().isEmpty())))){
+            int warning = JOptionPane.showConfirmDialog(null, "Nothing to Reserve.", "Attention.",
+        JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else {
+            JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Reserve this book?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // edit the patron if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+            bookID = jTextReservationBookID.getText();
+            patronID = jTextReservationPatID.getText();
+            reservationStatus = "Y";
+            reservationID = patronID;
+            reservationDate = jFormattedReservationDateCollection.getText();
+            
+            Date resDate;
+            // add 3 days to the reservation date to get the availability date
+            
+                SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");
+                try {
+                    resDate = formattedDate.parse(reservationDate);
+                    Calendar c = Calendar.getInstance(); 
+                    c.setTime(resDate);
+                    c.add(Calendar.DATE, 2);  // number of days to add      
+                    availabilityDate = (String)(formattedDate.format(c.getTime()));
+                } catch (ParseException ex) {
+                    Logger.getLogger(BooksMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            
+        
+            reserve = "UPDATE book SET reserved = ?, reservation_id = ?, reservation_date = ?, availability = ? WHERE book_id = ?";
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        pStmt = conn.prepareStatement(reserve);
+        // update the record
+        
+        
+        pStmt.setString(1, reservationStatus);
+        pStmt.setString(2, reservationID);
+        pStmt.setString(3, reservationDate);
+        pStmt.setString(4, availabilityDate); 
+        pStmt.setString(5, bookID);
+        
+        pStmt.executeUpdate();
+        conn.close();
+            } catch(SQLException se){}
+        
+        jTextReservationBookID.setText("");
+        jTextReservationTitle.setText("");
+        jTextReservationAuthor.setText("");
+        jTextReservationPatron.setText("");
+        jTextReservationPatID.setText("");
+        jFormattedReservationDateCollection.setText("");
+        reservationStatus = "N";
+        
+        
+        }    
+        }  
+        
+    }//GEN-LAST:event_jButtonReserveActionPerformed
+
+    private void jButtonReservationCancelReservationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationCancelReservationActionPerformed
+        // TODO add your handling code here:
+        
+        if((jTextReservationBookID.getText().isEmpty()) || (jTextReservationPatID.getText().isEmpty())){
+        int warning = JOptionPane.showConfirmDialog(null, "Please enter ID(s).", "Attention.",
+        JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else if((jTextReservationTitle.getText().isEmpty()) && (!((jTextReservationBookID.getText().isEmpty()) || (jTextCheckOutPatID.getText().isEmpty())))){
+            int warning = JOptionPane.showConfirmDialog(null, "Nothing to cancel.", "Attention.",
+        JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else {
+            JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Cancel this reservation?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // edit the patron if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+            bookID = jTextReservationBookID.getText();
+            patronID = jTextReservationPatID.getText();
+            reservationStatus = "N";
+            reservationID = patronID;
+            reservationDate = jFormattedReservationDateCollection.getText();
+            availabilityDate = currentDate;
+            cancelReservation = "UPDATE book SET reserved = ?, availability = ? WHERE book_id = ?";
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        pStmt = conn.prepareStatement(cancelReservation);
+        // update the record
+        
+        
+        pStmt.setString(1, reservationStatus);
+        pStmt.setString(2, availabilityDate); 
+        pStmt.setString(3, bookID);
+        
+        pStmt.executeUpdate();
+        conn.close();
+            } catch(SQLException se){}
+        
+        jTextReservationBookID.setText("");
+        jTextReservationTitle.setText("");
+        jTextReservationAuthor.setText("");
+        jTextReservationPatron.setText("");
+        jTextReservationPatID.setText("");
+        jFormattedReservationDateCollection.setText("");
+        reservationStatus = "N";
+        
+        
+        }    
+        }  
+        
+    }//GEN-LAST:event_jButtonReservationCancelReservationActionPerformed
+
+    private void jButtonBookEditSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookEditSearchActionPerformed
+        // TODO add your handling code here:
+        // Search for a record to edit
+        
+        jTextEditTitle.setText("");
+        jTextEditAuthor.setText("");
+        jTextEditISBN.setText("");
+        
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        bookID = jTextEditBookID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(bookID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+                
+        search = "SELECT * FROM book WHERE book_id = " + bookID + " ";
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+        jTextEditTitle.setText(rs.getString("title"));
+        jTextEditAuthor.setText(rs.getString("author"));
+        jTextEditISBN.setText(rs.getString("isbn"));
+        jComboBoxEditCategory.setSelectedItem(rs.getString("category"));
+         
+        
+        } // end while
+        
+        
+        String test = jTextEditTitle.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+           
+           status = 1;
+        }
+        
+        
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+    }//GEN-LAST:event_jButtonBookEditSearchActionPerformed
+
+    private void jButtonBookEditCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookEditCancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButtonBookEditCancelActionPerformed
      // end adding book
     
     /**
@@ -1897,10 +2151,10 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAddBook;
+    private javax.swing.JButton jButtonBookEditCancel;
+    private javax.swing.JButton jButtonBookEditSearch;
     private javax.swing.JButton jButtonCheckIn;
     private javax.swing.JButton jButtonCheckInCancel;
     private javax.swing.JButton jButtonCheckInSearch;
@@ -1910,10 +2164,11 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCheckOutSearch;
     private javax.swing.JButton jButtonReservationBookIDSearch;
     private javax.swing.JButton jButtonReservationCancel;
+    private javax.swing.JButton jButtonReservationCancelReservation;
     private javax.swing.JButton jButtonReservationPatronSearch;
     private javax.swing.JButton jButtonReserve;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBoxCategory;
+    private javax.swing.JComboBox<String> jComboBoxEditCategory;
     private javax.swing.JFormattedTextField jFormattedCheckInDateBorrowed;
     private javax.swing.JFormattedTextField jFormattedCheckInReturnDate;
     private javax.swing.JFormattedTextField jFormattedCheckOutDate;
@@ -1991,11 +2246,11 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JTextField jTextCheckOutPatID;
     private javax.swing.JTextField jTextCheckOutTitle;
     private javax.swing.JTextField jTextDaysOverdue;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
+    private javax.swing.JTextField jTextEditAuthor;
+    private javax.swing.JTextField jTextEditBookID;
+    private javax.swing.JTextField jTextEditISBN;
+    private javax.swing.JTextField jTextEditTitle;
     private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField31;
     private javax.swing.JTextField jTextField32;
     private javax.swing.JTextField jTextField33;

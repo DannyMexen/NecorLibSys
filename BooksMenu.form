@@ -730,19 +730,28 @@
                                   <Component id="jLabel21" alignment="1" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jTextReservationTitle" alignment="0" pref="254" max="32767" attributes="0"/>
-                                  <Component id="jTextReservationAuthor" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jTextReservationPatID" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="jButtonReservationPatronSearch" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jTextReservationTitle" alignment="0" pref="254" max="32767" attributes="0"/>
+                                          <Component id="jTextReservationAuthor" alignment="0" max="32767" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <Component id="jTextReservationPatID" min="-2" pref="50" max="-2" attributes="0"/>
+                                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                              <Component id="jButtonReservationPatronSearch" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jTextReservationPatron" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jFormattedReservationDateAvailable" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="jTextReservationPatron" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jFormattedReservationDateCollection" linkSize="5" alignment="0" min="-2" pref="99" max="-2" attributes="0"/>
-                                  <Component id="jFormattedReservationDateAvailable" linkSize="5" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jFormattedReservationDateCollection" linkSize="5" min="-2" pref="99" max="-2" attributes="0"/>
+                                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                                      <Component id="jButtonReservationCancelReservation" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jButtonReserve" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -799,6 +808,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButtonReserve" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonReservationCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonReservationCancelReservation" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -888,6 +898,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reserve"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReserveActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonReservationCancel">
               <Properties>
@@ -904,6 +917,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReservationPatronSearchActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonReservationCancelReservation">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Clear Reservation"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReservationCancelReservationActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -935,7 +957,7 @@
                               <Component id="jTextAuthor" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextISBN" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxCategory" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="188" max="32767" attributes="0"/>
                   </Group>
@@ -969,7 +991,7 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxCategory" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="33" pref="153" max="32767" attributes="0"/>
                   </Group>
@@ -1029,7 +1051,7 @@
                 <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="jComboBoxCategory">
               <Properties>
                 <Property name="maximumRowCount" type="int" value="2"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -1069,16 +1091,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jTextField24" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="jTextEditBookID" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jButton9" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonBookEditSearch" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField25" alignment="0" pref="278" max="32767" attributes="0"/>
-                              <Component id="jTextField26" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextField28" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
+                              <Component id="jTextEditTitle" alignment="0" pref="278" max="32767" attributes="0"/>
+                              <Component id="jTextEditAuthor" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextEditISBN" alignment="0" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxEditCategory" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="191" max="32767" attributes="0"/>
                   </Group>
@@ -1086,7 +1108,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jButton10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton14" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonBookEditCancel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1097,33 +1119,33 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField24" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton9" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextEditBookID" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonBookEditSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField25" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextEditTitle" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField26" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextEditAuthor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField28" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextEditISBN" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBoxEditCategory" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="55" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton10" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton14" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonBookEditCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1156,23 +1178,26 @@
                 <Property name="text" type="java.lang.String" value="Category:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField24">
+            <Component class="javax.swing.JTextField" name="jTextEditBookID">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton9">
+            <Component class="javax.swing.JButton" name="jButtonBookEditSearch">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Search"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField25">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField25ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBookEditSearchActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField26">
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField28">
+            <Component class="javax.swing.JTextField" name="jTextEditTitle">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField28ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextEditTitleActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextEditAuthor">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextEditISBN">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextEditISBNActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton10">
@@ -1180,12 +1205,15 @@
                 <Property name="text" type="java.lang.String" value="Save"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton14">
+            <Component class="javax.swing.JButton" name="jButtonBookEditCancel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancel"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBookEditCancelActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="jComboBoxEditCategory">
               <Properties>
                 <Property name="maximumRowCount" type="int" value="2"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -1196,7 +1224,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxEditCategoryActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

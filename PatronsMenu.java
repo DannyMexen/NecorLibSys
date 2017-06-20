@@ -722,9 +722,14 @@ public class PatronsMenu extends javax.swing.JDialog {
     private void jButtonEditSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSearchActionPerformed
         // TODO add your handling code here:
         // Search for a record to edit
-        
-        //jTextEditFirstName.setText("Test");
-        jButtonEditClearActionPerformed(evt);
+        jTextEditPatID.setText("");
+        jTextEditFirstName.setText("");
+        jTextEditInitial.setText("");
+        jTextEditLastName.setText("");
+        jFormattedEditDOB.setText("");
+        jTextEditAddress.setText("");
+        jTextEditEmail.setText("");
+        jTextEditPhone.setText("");
         
         try{
         Class.forName(JDBC_DRIVER);
@@ -881,24 +886,7 @@ public class PatronsMenu extends javax.swing.JDialog {
 
     private void jButtonEditClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditClearActionPerformed
      // TODO add your handling code here:
-   
-     firstName = ""; 
-     initial = "";
-     lastName = "";
-     address = "";
-     dob = "";
-     gender = "";
-     email = "";
-     phone = "";
-     
-     //jTextEditPatID.setText("");
-     jTextEditFirstName.setText("");
-     jTextEditInitial.setText("");
-     jTextEditLastName.setText("");
-     jFormattedEditDOB.setText("");
-     jTextEditAddress.setText("");
-     jTextEditEmail.setText("");
-     jTextEditPhone.setText("");
+   dispose();
      
      //dispose();
     }//GEN-LAST:event_jButtonEditClearActionPerformed
