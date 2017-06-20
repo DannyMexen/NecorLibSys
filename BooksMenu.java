@@ -1745,8 +1745,14 @@ public class BooksMenu extends javax.swing.JDialog {
             else if (bookStatus.equals("Checked-in")){
                 jFormattedReservationDateAvailable.setText("Today");
                 
-                // Add 3 days to collection date
-                jFormattedReservationDateCollection.setText("Today");
+                // Add 2 days to collection date
+                SimpleDateFormat formattedDate = new SimpleDateFormat("yyyy-MM-dd");            
+                Calendar c = Calendar.getInstance();        
+                c.add(Calendar.DATE, 2);  // number of days to add      
+                reservationDate = (String)(formattedDate.format(c.getTime()));
+      
+                jFormattedReservationDateCollection.setText(reservationDate);
+                
             }
             }
             
