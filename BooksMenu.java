@@ -37,7 +37,10 @@ public class BooksMenu extends javax.swing.JDialog {
     String isbn;
     String category;
     String insertBook;
+    String deleteBook;
     String bookID;
+    String editBook;
+    String insertEditBook;
     String search;
     String patronDetails;
     String currentDate;
@@ -199,23 +202,23 @@ public class BooksMenu extends javax.swing.JDialog {
         jTextEditTitle = new javax.swing.JTextField();
         jTextEditAuthor = new javax.swing.JTextField();
         jTextEditISBN = new javax.swing.JTextField();
-        jButton10 = new javax.swing.JButton();
+        jButtonBookEditSave = new javax.swing.JButton();
         jButtonBookEditCancel = new javax.swing.JButton();
         jComboBoxEditCategory = new javax.swing.JComboBox<>();
         jPanel5 = new javax.swing.JPanel();
         jLabel37 = new javax.swing.JLabel();
-        jTextField27 = new javax.swing.JTextField();
-        jButton11 = new javax.swing.JButton();
+        jTextDeleteBookID = new javax.swing.JTextField();
+        jButtonBookDeleteSearch = new javax.swing.JButton();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel44 = new javax.swing.JLabel();
-        jTextField31 = new javax.swing.JTextField();
-        jTextField32 = new javax.swing.JTextField();
-        jTextField33 = new javax.swing.JTextField();
-        jTextField34 = new javax.swing.JTextField();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
+        jTextDeleteTitle = new javax.swing.JTextField();
+        jTextDeleteAuthor = new javax.swing.JTextField();
+        jTextDeleteISBN = new javax.swing.JTextField();
+        jTextDeleteCategory = new javax.swing.JTextField();
+        jButtonBookDeleteCancel = new javax.swing.JButton();
+        jButtonBookDelete = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -920,7 +923,12 @@ public class BooksMenu extends javax.swing.JDialog {
             }
         });
 
-        jButton10.setText("Save");
+        jButtonBookEditSave.setText("Save");
+        jButtonBookEditSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBookEditSaveActionPerformed(evt);
+            }
+        });
 
         jButtonBookEditCancel.setText("Cancel");
         jButtonBookEditCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -963,7 +971,7 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton10)
+                .addComponent(jButtonBookEditSave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonBookEditCancel)
                 .addContainerGap())
@@ -994,7 +1002,7 @@ public class BooksMenu extends javax.swing.JDialog {
                     .addComponent(jComboBoxEditCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
+                    .addComponent(jButtonBookEditSave)
                     .addComponent(jButtonBookEditCancel))
                 .addContainerGap())
         );
@@ -1003,7 +1011,12 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel37.setText("Book ID:");
 
-        jButton11.setText("Search");
+        jButtonBookDeleteSearch.setText("Search");
+        jButtonBookDeleteSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBookDeleteSearchActionPerformed(evt);
+            }
+        });
 
         jLabel41.setText("Book Title:");
 
@@ -1013,22 +1026,32 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel44.setText("Category:");
 
-        jTextField31.setEditable(false);
+        jTextDeleteTitle.setEditable(false);
 
-        jTextField32.setEditable(false);
-        jTextField32.addActionListener(new java.awt.event.ActionListener() {
+        jTextDeleteAuthor.setEditable(false);
+        jTextDeleteAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField32ActionPerformed(evt);
+                jTextDeleteAuthorActionPerformed(evt);
             }
         });
 
-        jTextField33.setEditable(false);
+        jTextDeleteISBN.setEditable(false);
 
-        jTextField34.setEditable(false);
+        jTextDeleteCategory.setEditable(false);
 
-        jButton12.setText("Cancel");
+        jButtonBookDeleteCancel.setText("Cancel");
+        jButtonBookDeleteCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBookDeleteCancelActionPerformed(evt);
+            }
+        });
 
-        jButton13.setText("Delete");
+        jButtonBookDelete.setText("Delete");
+        jButtonBookDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBookDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1045,20 +1068,20 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextDeleteBookID, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton11))
+                        .addComponent(jButtonBookDeleteSearch))
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField31, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
-                        .addComponent(jTextField32)))
+                        .addComponent(jTextDeleteISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextDeleteTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                        .addComponent(jTextDeleteAuthor)))
                 .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton13)
+                .addComponent(jButtonBookDelete)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton12)
+                .addComponent(jButtonBookDeleteCancel)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -1067,28 +1090,28 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel37)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11))
+                    .addComponent(jTextDeleteBookID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonBookDeleteSearch))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel41)
-                    .addComponent(jTextField31, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDeleteTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
-                    .addComponent(jTextField32, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDeleteAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel43)
-                    .addComponent(jTextField33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDeleteISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel44)
-                    .addComponent(jTextField34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton12)
-                    .addComponent(jButton13))
+                    .addComponent(jButtonBookDeleteCancel)
+                    .addComponent(jButtonBookDelete))
                 .addContainerGap())
         );
 
@@ -1221,9 +1244,9 @@ public class BooksMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextEditISBNActionPerformed
 
-    private void jTextField32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField32ActionPerformed
+    private void jTextDeleteAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextDeleteAuthorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField32ActionPerformed
+    }//GEN-LAST:event_jTextDeleteAuthorActionPerformed
 
     private void jTextAuthorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextAuthorActionPerformed
         // TODO add your handling code here:
@@ -2102,6 +2125,190 @@ public class BooksMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButtonBookEditCancelActionPerformed
+
+    private void jButtonBookEditSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookEditSaveActionPerformed
+        // TODO add your handling code here:
+        
+         
+        //patronID = jTextEditPatID.getText();
+        int id = Integer.parseInt(bookID);
+        title = jTextEditTitle.getText();
+        author = jTextEditAuthor.getText();
+        isbn = jTextEditISBN.getText();
+        if(jComboBoxEditCategory.getSelectedItem().equals(fiction)){
+            category = fiction;
+        } else {
+            category = nonFiction;
+        }
+        
+        editBook = "UPDATE book SET title = ?, author = ?, isbn = ?, category = ? WHERE book_id = ?";
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+         
+        
+        //warn user to enter something if field is empty
+        if ((title.isEmpty() || author.isEmpty()) || (isbn.isEmpty() || category.isEmpty())){
+           int warning = JOptionPane.showConfirmDialog(null, "Enter missing values.", "Warning",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+               
+        else {
+                    
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Edit this book's details?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // edit the patron if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+            
+            // compare IDs
+            String compareID = jTextEditBookID.getText();
+            if (!(compareID.equals(bookID))){
+                int warning = JOptionPane.showConfirmDialog(null, "You cannot change an existing ID.", "Warning",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+                
+            }
+        
+            else {
+                 // give user a chance to add a new record with the id entered      
+        if (status == 1){
+                insertEditBook = "INSERT INTO book(book_id) VALUES(" + id + ")";
+                stmt.executeUpdate(insertEditBook);
+                status = 0;
+            } 
+        // update the record
+        //stmt.executeUpdate(editPatron);
+        pStmt = conn.prepareStatement(editBook);
+        pStmt.setString(1, title);
+        pStmt.setString(2, author);
+        pStmt.setString(3, isbn);
+        pStmt.setString(4, category);    
+        pStmt.setString(5, bookID);
+        
+        pStmt.executeUpdate();
+        conn.close();
+            }
+        
+        
+        } 
+            
+        }  
+        
+        }catch(SQLException se){}
+        
+    }//GEN-LAST:event_jButtonBookEditSaveActionPerformed
+
+    private void jButtonBookDeleteSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookDeleteSearchActionPerformed
+        // TODO add your handling code here:
+        
+        jTextDeleteTitle.setText("");
+        jTextDeleteAuthor.setText("");
+        jTextDeleteISBN.setText("");
+        
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        bookID = jTextDeleteBookID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(bookID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+                
+        search = "SELECT * FROM book WHERE book_id = " + bookID + " ";
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+        jTextDeleteTitle.setText(rs.getString("title"));
+        jTextDeleteAuthor.setText(rs.getString("author"));
+        jTextDeleteISBN.setText(rs.getString("isbn"));
+        jTextDeleteCategory.setText(rs.getString("category"));
+         
+        
+        } // end while
+        
+        
+        String test = jTextDeleteTitle.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+           
+           status = 1;
+        }
+        
+        
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+    }//GEN-LAST:event_jButtonBookDeleteSearchActionPerformed
+
+    private void jButtonBookDeleteCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookDeleteCancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButtonBookDeleteCancelActionPerformed
+
+    private void jButtonBookDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookDeleteActionPerformed
+        // TODO add your handling code here:
+        bookID = jTextDeleteBookID.getText();
+        int id = Integer.parseInt(bookID);
+        
+        deleteBook = "DELETE FROM book WHERE book_id = " + id ;
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        
+        // Prompt the user
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Delete this book?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // add book if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+        
+        // insert the record
+        stmt.executeUpdate(deleteBook);
+        
+        
+        // clear the text fields - use a method
+        jTextDeleteBookID.setText("");
+        jTextDeleteTitle.setText("");
+        jTextDeleteAuthor.setText("");
+        jTextDeleteISBN.setText("");
+        jTextDeleteCategory.setText("");
+        
+         
+        conn.close();
+        }  
+          
+        }catch(SQLException se){}
+    
+    }//GEN-LAST:event_jButtonBookDeleteActionPerformed
      // end adding book
     
     /**
@@ -2147,13 +2354,13 @@ public class BooksMenu extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButtonAddBook;
+    private javax.swing.JButton jButtonBookDelete;
+    private javax.swing.JButton jButtonBookDeleteCancel;
+    private javax.swing.JButton jButtonBookDeleteSearch;
     private javax.swing.JButton jButtonBookEditCancel;
+    private javax.swing.JButton jButtonBookEditSave;
     private javax.swing.JButton jButtonBookEditSearch;
     private javax.swing.JButton jButtonCheckIn;
     private javax.swing.JButton jButtonCheckInCancel;
@@ -2246,15 +2453,15 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JTextField jTextCheckOutPatID;
     private javax.swing.JTextField jTextCheckOutTitle;
     private javax.swing.JTextField jTextDaysOverdue;
+    private javax.swing.JTextField jTextDeleteAuthor;
+    private javax.swing.JTextField jTextDeleteBookID;
+    private javax.swing.JTextField jTextDeleteCategory;
+    private javax.swing.JTextField jTextDeleteISBN;
+    private javax.swing.JTextField jTextDeleteTitle;
     private javax.swing.JTextField jTextEditAuthor;
     private javax.swing.JTextField jTextEditBookID;
     private javax.swing.JTextField jTextEditISBN;
     private javax.swing.JTextField jTextEditTitle;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField32;
-    private javax.swing.JTextField jTextField33;
-    private javax.swing.JTextField jTextField34;
     private javax.swing.JTextField jTextISBN;
     private javax.swing.JTextField jTextPenalty;
     private javax.swing.JTextField jTextReservationAuthor;
