@@ -57,7 +57,7 @@ public class PatronsMenu extends javax.swing.JDialog {
         jLabel24 = new javax.swing.JLabel();
         jComboBoxGender = new javax.swing.JComboBox<>();
         jFormattedTextDOB = new javax.swing.JFormattedTextField();
-        jButton2 = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jTextEditPatID = new javax.swing.JTextField();
@@ -161,7 +161,12 @@ public class PatronsMenu extends javax.swing.JDialog {
             }
         });
 
-        jButton2.setText("Cancel");
+        jButtonCancel.setText("Cancel");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,7 +206,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                                 .addGap(233, 233, 233)
                                 .addComponent(jButtonAddPatron)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))
+                                .addComponent(jButtonCancel)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -247,7 +252,7 @@ public class PatronsMenu extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAddPatron)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonCancel))
                 .addContainerGap())
         );
 
@@ -875,8 +880,9 @@ public class PatronsMenu extends javax.swing.JDialog {
     }//GEN-LAST:event_jButtonEditSaveActionPerformed
 
     private void jButtonEditClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditClearActionPerformed
-        // TODO add your handling code here:
-        firstName = ""; 
+     // TODO add your handling code here:
+   
+     firstName = ""; 
      initial = "";
      lastName = "";
      address = "";
@@ -893,6 +899,8 @@ public class PatronsMenu extends javax.swing.JDialog {
      jTextEditAddress.setText("");
      jTextEditEmail.setText("");
      jTextEditPhone.setText("");
+     
+     //dispose();
     }//GEN-LAST:event_jButtonEditClearActionPerformed
 
     private void jButtonDeleteSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteSearchActionPerformed
@@ -1016,6 +1024,11 @@ public class PatronsMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1058,8 +1071,8 @@ public class PatronsMenu extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonAddPatron;
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonDeleteSearch;
     private javax.swing.JButton jButtonEditClear;

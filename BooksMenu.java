@@ -55,6 +55,7 @@ public class BooksMenu extends javax.swing.JDialog {
     String checkOut;
     String daysDue;
     String penalty;
+    String checkIn;
     int status;
     int daysOverdue;
     int overdueRate = 5;
@@ -151,23 +152,23 @@ public class BooksMenu extends javax.swing.JDialog {
         jFormattedcheckOutAvailablility = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
+        jTextReservationBookID = new javax.swing.JTextField();
+        jButtonReservationBookIDSearch = new javax.swing.JButton();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jFormattedTextField5 = new javax.swing.JFormattedTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jFormattedTextField6 = new javax.swing.JFormattedTextField();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton18 = new javax.swing.JButton();
+        jTextReservationTitle = new javax.swing.JTextField();
+        jTextReservationAuthor = new javax.swing.JTextField();
+        jFormattedReservationDateAvailable = new javax.swing.JFormattedTextField();
+        jTextReservationPatID = new javax.swing.JTextField();
+        jTextReservationPatron = new javax.swing.JTextField();
+        jFormattedReservationDateCollection = new javax.swing.JFormattedTextField();
+        jButtonReserve = new javax.swing.JButton();
+        jButtonReservationCancel = new javax.swing.JButton();
+        jButtonReservationPatronSearch = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -639,7 +640,12 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel20.setText("Book ID:");
 
-        jButton5.setText("Search");
+        jButtonReservationBookIDSearch.setText("Search");
+        jButtonReservationBookIDSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservationBookIDSearchActionPerformed(evt);
+            }
+        });
 
         jLabel21.setText("Book Title:");
 
@@ -653,13 +659,39 @@ public class BooksMenu extends javax.swing.JDialog {
 
         jLabel27.setText("Collection Date:");
 
-        jFormattedTextField5.setText("Immediately");
+        jTextReservationTitle.setEditable(false);
+        jTextReservationTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextReservationTitleActionPerformed(evt);
+            }
+        });
 
-        jButton7.setText("Reserve");
+        jTextReservationAuthor.setEditable(false);
 
-        jButton8.setText("Cancel");
+        jFormattedReservationDateAvailable.setEditable(false);
 
-        jButton18.setText("OK");
+        jTextReservationPatID.setEditable(false);
+
+        jTextReservationPatron.setEditable(false);
+
+        jFormattedReservationDateCollection.setEditable(false);
+
+        jButtonReserve.setText("Reserve");
+
+        jButtonReservationCancel.setText("Cancel");
+        jButtonReservationCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservationCancelActionPerformed(evt);
+            }
+        });
+
+        jButtonReservationPatronSearch.setText("Search");
+        jButtonReservationPatronSearch.setEnabled(false);
+        jButtonReservationPatronSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReservationPatronSearchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -672,9 +704,9 @@ public class BooksMenu extends javax.swing.JDialog {
                         .addGap(50, 50, 50)
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextReservationBookID, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton5))
+                        .addComponent(jButtonReservationBookIDSearch))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel26)
@@ -685,23 +717,23 @@ public class BooksMenu extends javax.swing.JDialog {
                             .addComponent(jLabel21))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                            .addComponent(jTextField15)
+                            .addComponent(jTextReservationTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addComponent(jTextReservationAuthor)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextReservationPatID, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton18))
-                            .addComponent(jTextField17)
-                            .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jButtonReservationPatronSearch))
+                            .addComponent(jTextReservationPatron)
+                            .addComponent(jFormattedReservationDateCollection, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedReservationDateAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7)))
+                        .addComponent(jButtonReserve)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton8)
+                .addComponent(jButtonReservationCancel)
                 .addContainerGap())
         );
 
-        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedTextField5, jFormattedTextField6});
+        jPanel6Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedReservationDateAvailable, jFormattedReservationDateCollection});
 
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -709,39 +741,39 @@ public class BooksMenu extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                    .addComponent(jTextReservationBookID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonReservationBookIDSearch))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextReservationTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextReservationAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jFormattedTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedReservationDateAvailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton18))
+                    .addComponent(jTextReservationPatID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonReservationPatronSearch))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextReservationPatron, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jFormattedTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedReservationDateCollection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8))
+                    .addComponent(jButtonReserve)
+                    .addComponent(jButtonReservationCancel))
                 .addContainerGap())
         );
 
@@ -1051,9 +1083,9 @@ public class BooksMenu extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -1063,7 +1095,58 @@ public class BooksMenu extends javax.swing.JDialog {
     // Finish will save changes and clear all fields (dialog notifying user of the same)
     private void jButtonCheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCheckInActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        
+        // If a book ID has not been entered, warn the user
+        if((jTextCheckInBookID.getText().isEmpty())){
+        int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+        JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+        else {
+            bookID = jTextCheckInBookID.getText();
+            bookStatus = "Checked-in";  
+            
+        JDialog.setDefaultLookAndFeelDecorated(true);
+        int response = JOptionPane.showConfirmDialog(null, "Check-in this book?", "Confirm",
+        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        
+        // close dialog if no
+        if (response == JOptionPane.NO_OPTION) {
+            JOptionPane.getRootFrame().dispose();
+            
+        // edit the patron if yes
+        } else if (response == JOptionPane.YES_OPTION) {
+                
+            checkIn = "UPDATE book SET book_status = ? WHERE book_id = ?";
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        pStmt = conn.prepareStatement(checkIn);
+        
+        // update the record
+        
+        pStmt.setString(1, bookStatus);
+        pStmt.setString(2, bookID);
+        
+        pStmt.executeUpdate();
+        conn.close();
+            } catch(SQLException se){}
+        
+        jTextCheckInBookID.setText("");
+        jTextCheckInTitle.setText("");
+        jTextCheckInAuthor.setText("");
+        jTextCheckInBorrower.setText("");
+        jTextCheckInPatID.setText("");
+        jRadioCheckInOverdueNo.setSelected(true);
+        jTextDaysOverdue.setText("");
+        jTextPenalty.setText("");
+        jFormattedCheckInDateBorrowed.setText("");
+        jFormattedCheckInReturnDate.setText("");
+        }    
+        } 
     }//GEN-LAST:event_jButtonCheckInActionPerformed
 
     private void jTextPenaltyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextPenaltyActionPerformed
@@ -1108,18 +1191,14 @@ public class BooksMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextAuthorActionPerformed
     
-    
-    
-   
-    
-    
-
     // Add button inserts the new record to the database
     private void jButtonAddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddBookActionPerformed
         // TODO add your handling code here:
         title = jTextBookTitle.getText();
         author = jTextAuthor.getText();
         isbn = jTextISBN.getText();
+        
+        // get from the combo box
         //category = jTextCategory.getText();
         
         insertBook = "INSERT INTO book"+
@@ -1221,7 +1300,7 @@ public class BooksMenu extends javax.swing.JDialog {
         while(rs.next()){
         jTextCheckInTitle.setText(rs.getString("title"));
         jTextCheckInAuthor.setText(rs.getString("author"));
-        bookStatus = rs.getString("status");
+        bookStatus = rs.getString("book_status");
         
         
         if (bookStatus.equals("Checked-in")){
@@ -1246,6 +1325,7 @@ public class BooksMenu extends javax.swing.JDialog {
             jTextCheckInBorrower.setText(rs.getString("first_name") + " " + rs.getString("initial") + ". " + rs.getString("last_name"));
         }
        
+        email = rs.getString("email");
         
         } // end inner while for name
         
@@ -1336,7 +1416,7 @@ public class BooksMenu extends javax.swing.JDialog {
             currentDate = jFormattedCheckOutDate.getText();
             dueDate = jFormattedCheckOutReturnDate.getText();
         
-            checkOut = "UPDATE book SET status = ?, patron_patron_id = ?, borrow_date = ?, return_date = ? WHERE book_id = ?";
+            checkOut = "UPDATE book SET book_status = ?, patron_patron_id = ?, borrow_date = ?, return_date = ? WHERE book_id = ?";
         
         try{
         Class.forName(JDBC_DRIVER);
@@ -1415,7 +1495,7 @@ public class BooksMenu extends javax.swing.JDialog {
         while(rs.next()){
         jTextCheckOutTitle.setText(rs.getString("title"));
         jTextCheckOutAuthor.setText(rs.getString("author"));
-        bookStatus = rs.getString("status");
+        bookStatus = rs.getString("book_status");
         reservationStatus = rs.getString("reserved");
         
         
@@ -1549,6 +1629,219 @@ public class BooksMenu extends javax.swing.JDialog {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButtonCheckInCancelActionPerformed
+
+    private void jButtonReservationCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationCancelActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButtonReservationCancelActionPerformed
+
+    private void jButtonReservationBookIDSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationBookIDSearchActionPerformed
+        // TODO add your handling code here:
+        // First, search for the book
+        // Search for a record to check-out
+        
+        
+        jTextReservationTitle.setText("");
+        jTextReservationAuthor.setText("");
+        jFormattedReservationDateAvailable.setText("");
+        //jTextReservationPatID.setText("");
+        //jTextReservationPatron.setText("");
+        jFormattedCheckOutReservationDate.setText("");
+        jFormattedReservationDateCollection.setText("");
+        jTextReservationPatID.setEditable(false);
+        jButtonReservationPatronSearch.setEnabled(false);
+        reservationStatus = "N";
+        
+        // date
+        DateFormat df;
+        df = new SimpleDateFormat("yyyy-MM-dd");
+        Date available, collect;
+        
+        
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        bookID = jTextReservationBookID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(bookID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+              
+        }
+        else{
+                
+        search = "SELECT * FROM book WHERE book_id = " + bookID + " ";
+        
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+        jTextReservationTitle.setText(rs.getString("title"));
+        jTextReservationAuthor.setText(rs.getString("author"));
+        bookStatus = rs.getString("book_status");
+        reservationStatus = rs.getString("reserved");
+        
+        if (reservationStatus.equals("Y")){
+            
+            
+            jTextReservationPatID.setEditable(false);
+            jButtonReservationPatronSearch.setEnabled(false);
+            jButtonReserve.setEnabled(false);
+            
+            available = rs.getDate("availability");
+            collect = rs.getDate("reservation_date");
+            
+            availabilityDate = df.format(available);
+            reservationDate = df.format(collect);
+            
+            jFormattedReservationDateAvailable.setText(availabilityDate);
+            jFormattedReservationDateCollection.setText(reservationDate);
+            
+            //int ID = rs.getInt("patron_patron_id");
+            patronID = String.valueOf(rs.getInt("patron_patron_id"));
+            patronDetails = "SELECT * FROM patron WHERE patron_id = " + patronID + " ";
+            rs = stmt.executeQuery(patronDetails);
+                while(rs.next()){
+                    jTextReservationPatID.setText(patronID);
+                    firstName = rs.getString("first_name");
+                    initial = rs.getString("initial");
+                    lastName = rs.getString("last_name");
+                    
+                    if ((initial.isEmpty()) || (initial == null)){
+                        jTextReservationPatron.setText(firstName + " " + lastName);
+                    } else {
+                        jTextReservationPatron.setText(firstName + " " + initial + ". " + lastName);
+                    }
+                    
+                } // end patron details while
+                
+              
+        } else if (reservationStatus.equals("N")) { // end if book has already been checked-out
+            
+            
+            jButtonReservationPatronSearch.setEnabled(true);
+            jTextReservationPatID.setEditable(true);
+            jButtonReservationPatronSearch.setEnabled(true);
+            jButtonReserve.setEnabled(true);
+            bookID = jTextReservationBookID.getText();
+            search = "SELECT * FROM book WHERE book_id = " + bookID + " ";
+            rs = stmt.executeQuery(search);
+            while (rs.next()){
+                bookStatus = rs.getString("book_status");
+            
+            if(bookStatus.equals("Checked-out")){
+                // change the date
+                available = rs.getDate("return_date");
+                availabilityDate = df.format(available);
+                jFormattedReservationDateAvailable.setText(availabilityDate);
+                jFormattedReservationDateCollection.setText(availabilityDate);
+            }
+            
+            else if (bookStatus.equals("Checked-in")){
+                jFormattedReservationDateAvailable.setText("Today");
+                
+                // Add 3 days to collection date
+                jFormattedReservationDateCollection.setText("Today");
+            }
+            }
+            
+        }
+
+        
+        
+        
+        
+        
+        } // end while
+        
+        
+        
+       String test = jTextReservationTitle.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+            jTextReservationPatID.setText("");
+            jTextReservationPatron.setText("");
+           status = 1;
+        }
+        
+        
+        
+        
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+      
+    }//GEN-LAST:event_jButtonReservationBookIDSearchActionPerformed
+
+    private void jTextReservationTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextReservationTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextReservationTitleActionPerformed
+
+    private void jButtonReservationPatronSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReservationPatronSearchActionPerformed
+        // TODO add your handling code here:
+        // Search for a patron to reserve the book
+        
+        //initialize text fields here
+         jTextReservationPatron.setText("");
+        
+        
+        try{
+        Class.forName(JDBC_DRIVER);
+        }catch(ClassNotFoundException e){}
+        try{
+        conn = DriverManager.getConnection(DB_URL, USER, PASS);
+        stmt = conn.createStatement();
+        patronID = jTextReservationPatID.getText();
+        
+        
+        //warn user if ID has not been entered
+        if(patronID.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "Please enter an ID.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+        }
+         
+        else{
+                
+        search = "SELECT * FROM patron WHERE patron_id = " + patronID + " ";
+        ResultSet rs = stmt.executeQuery(search);
+        
+        while(rs.next()){
+            if ((rs.getString("initial") == null) || (rs.getString("initial").equals(""))){
+                patron = (rs.getString("first_name")) + " " + (rs.getString("last_name"));
+            } else {
+        patron = (rs.getString("first_name")) + " " + (rs.getString("initial")) + ". " + (rs.getString("last_name"));
+            }
+            jTextReservationPatron.setText(patron);
+        
+        } // end while
+        
+        
+        
+        String test = jTextReservationPatron.getText();
+        if(test.isEmpty()){ 
+           int warning = JOptionPane.showConfirmDialog(null, "No record found.", "Attention.",
+            JOptionPane.PLAIN_MESSAGE, JOptionPane.ERROR_MESSAGE);
+            jTextReservationPatID.setText("");
+            jTextReservationPatron.setText("");
+           status = 1;
+        }     
+        
+        }
+        conn.close();
+        
+        
+        }catch(SQLException se){}
+        
+    }//GEN-LAST:event_jButtonReservationPatronSearchActionPerformed
      // end adding book
     
     /**
@@ -1600,10 +1893,6 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JButton jButtonAddBook;
     private javax.swing.JButton jButtonCheckIn;
@@ -1613,6 +1902,10 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JButton jButtonCheckOutCancel;
     private javax.swing.JButton jButtonCheckOutPatronSearch;
     private javax.swing.JButton jButtonCheckOutSearch;
+    private javax.swing.JButton jButtonReservationBookIDSearch;
+    private javax.swing.JButton jButtonReservationCancel;
+    private javax.swing.JButton jButtonReservationPatronSearch;
+    private javax.swing.JButton jButtonReserve;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFormattedTextField jFormattedCheckInDateBorrowed;
@@ -1620,8 +1913,8 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField jFormattedCheckOutDate;
     private javax.swing.JFormattedTextField jFormattedCheckOutReservationDate;
     private javax.swing.JFormattedTextField jFormattedCheckOutReturnDate;
-    private javax.swing.JFormattedTextField jFormattedTextField5;
-    private javax.swing.JFormattedTextField jFormattedTextField6;
+    private javax.swing.JFormattedTextField jFormattedReservationDateAvailable;
+    private javax.swing.JFormattedTextField jFormattedReservationDateCollection;
     private javax.swing.JFormattedTextField jFormattedcheckOutAvailablility;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -1692,11 +1985,6 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JTextField jTextCheckOutPatID;
     private javax.swing.JTextField jTextCheckOutTitle;
     private javax.swing.JTextField jTextDaysOverdue;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField24;
     private javax.swing.JTextField jTextField25;
     private javax.swing.JTextField jTextField26;
@@ -1708,6 +1996,11 @@ public class BooksMenu extends javax.swing.JDialog {
     private javax.swing.JTextField jTextField34;
     private javax.swing.JTextField jTextISBN;
     private javax.swing.JTextField jTextPenalty;
+    private javax.swing.JTextField jTextReservationAuthor;
+    private javax.swing.JTextField jTextReservationBookID;
+    private javax.swing.JTextField jTextReservationPatID;
+    private javax.swing.JTextField jTextReservationPatron;
+    private javax.swing.JTextField jTextReservationTitle;
     // End of variables declaration//GEN-END:variables
    
     
